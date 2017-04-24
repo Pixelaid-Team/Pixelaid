@@ -26,6 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+app.get('/canvas', (req, res) => {
+  res.render('canvas')
+})
+app.get('/questions', (req, res) => {
+  res.render('questions')
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -44,5 +51,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 app.listen(3000,console.log('listening on 3000'))
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec4cae51507e328ca68f1c6d8da9f50bd75592ec
 module.exports = app;
