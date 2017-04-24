@@ -1,13 +1,64 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('section').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('section').insert([
+        {
+          canvas_id: 1,
+          row_1:"YGYGYGYGYGYGYGYG",
+          row_2:"GYGYGYGYGYGYGYGY",
+          row_3:"YGYGYGYGYGYGYGYG",
+          row_4:"GYGYGYGYGYGYGYGY",
+          row_5:"YGYGYGYGYGYGYGYG",
+          row_6:"GYGYGYGYGYGYGYGY",
+          row_7:"YGYGYGYGYGYGYGYG",
+          row_8:"GYGYGYGYGYGYGYGY",
+          row_9:"YGYGYGYGYGYGYGYG",
+          row_10:"GYGYGYGYGYGYGYGY",
+          row_11:"YGYGYGYGYGYGYGYG",
+          row_12:"GYGYGYGYGYGYGYGY",
+          row_13:"YGYGYGYGYGYGYGYG",
+          row_14:"GYGYGYGYGYGYGYGY",
+          row_15:"YGYGYGYGYGYGYGYG"
+        },
+        {
+          canvas_id: 1,
+          row_1:"YGYGYGYGYGYGYGYG",
+          row_2:"GYGYGYGYGYGYGYGY",
+          row_3:"YGYGYGYGYGYGYGYG",
+          row_4:"GYGYGYGYGYGYGYGY",
+          row_5:"YGYGYGYGYGYGYGYG",
+          row_6:"GYGYGYGYGYGYGYGY",
+          row_7:"YGYGYGYGYGYGYGYG",
+          row_8:"GYGYGYGYGYGYGYGY",
+          row_9:"YGYGYGYGYGYGYGYG",
+          row_10:"GYGYGYGYGYGYGYGY",
+          row_11:"YGYGYGYGYGYGYGYG",
+          row_12:"GYGYGYGYGYGYGYGY",
+          row_13:"YGYGYGYGYGYGYGYG",
+          row_14:"GYGYGYGYGYGYGYGY",
+          row_15:"YGYGYGYGYGYGYGYG"
+        },
+        {
+          canvas_id: 1,
+          row_1:"YGYGYGYGYGYGYGYG",
+          row_2:"GYGYGYGYGYGYGYGY",
+          row_3:"YGYGYGYGYGYGYGYG",
+          row_4:"GYGYGYGYGYGYGYGY",
+          row_5:"YGYGYGYGYGYGYGYG",
+          row_6:"GYGYGYGYGYGYGYGY",
+          row_7:"YGYGYGYGYGYGYGYG",
+          row_8:"GYGYGYGYGYGYGYGY",
+          row_9:"YGYGYGYGYGYGYGYG",
+          row_10:"GYGYGYGYGYGYGYGY",
+          row_11:"YGYGYGYGYGYGYGYG",
+          row_12:"GYGYGYGYGYGYGYGY",
+          row_13:"YGYGYGYGYGYGYGYG",
+          row_14:"GYGYGYGYGYGYGYGY",
+          row_15:"YGYGYGYGYGYGYGYG"
+        }
       ]);
     });
 };

@@ -1,13 +1,29 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('kudo').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('kudo').insert([
+        {
+        title: "Hey thanks for help on the ERD's",
+        body: "hey where is the data model for users",
+        user_id: 1,
+        created_at: "Today"
+        },
+        {
+        title: "Hey thanks for help on the ERD's",
+        body: "hey where is the data model for users",
+        user_id: 3,
+        created_at: "Today"
+
+        },
+        {
+        title: "Hey thanks for help on the ERD'sn",
+        body: "hey where is the data model for users",
+        user_id: 2,
+        created_at: "Today"
+        }
       ]);
     });
 };
