@@ -4,13 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-require('dotenv').config()
+var session = require('express-session');
+var passport = require("passport");
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +25,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(session({
+//   secret: process.env.SECRET,
+//   name: 'i am a cookie',
+//   maxage: 3600000
+//   })
+// )
+
+//Passport authentication stuff
+app.use(passport.initialize())
+// app.use(passport.session())
+require('./helpers/passport')(passport)
 
 app.use('/', index);
 app.use('/users', users);
@@ -51,6 +65,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+<<<<<<< HEAD
 app.listen(5000,console.log('listening on 5000'))
+=======
+app.listen(port, console.log('listening on ' + port))
+>>>>>>> 0ddc22a988ff03012d3c5b90083a6ffd25af1b36
 
 module.exports = app;
