@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session')
+var session = require('express-session');
+var passport = require("passport");
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -23,17 +25,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.session({
-  secret: process.env.SECRET,
-  name: 'i am a cookie',
-  maxage: 3600000
-  })
-)
+// app.use(session({
+//   secret: process.env.SECRET,
+//   name: 'i am a cookie',
+//   maxage: 3600000
+//   })
+// )
 
 //Passport authentication stuff
 app.use(passport.initialize())
-app.use(passport.session())
-app.use(app.router)
+// app.use(passport.session())
 require('./helpers/passport')(passport)
 
 app.use('/', index);
