@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('kudo').del()
+  return knex('question').del()
     .then(function () {
       // Inserts seed entries
-      return knex('kudo').insert([
+      return knex('question').insert([
         {
         title: "Hey thanks for help on the ERD's",
         body: "hey where is the data model for users",
