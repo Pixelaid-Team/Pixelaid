@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Questions</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <nav class="nav z-depth-1">
+    <div class="nav-wrapper">
+      <a class="brand-logo"><img src="/reddit-logo.png" alt="" class="navLogo"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <!-- <li><a href="/index">Page2</a></li> -->
+        <!-- <li><a href="/incubate">Page3</a></li> -->
+      </ul>
+    </div>
+  </nav>
+  <body class="container">
+    <h1></h1>
+    <section class="submit-link">
+      <form action="/add-link" method="post">
+        <div>
+          <label for="url">URL</label>
+          <input type="text" name="url" value="http://">
+        </div>
+        <div>
+          <label for="title">title</label>
+          <input type="text" name="title" value="">
+        </div>
+        <button>Addlink</button>
+      </form>
+    </section>
+    <section>
+      <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Modal Header</h4>
+          <p>this is modal </p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
+    </section>
+    <main>
+
+
+      {{#each data}}
+        <!-- <form class="upvote" action="/upvote/((this.id))" method="post">
+          <button>-U-</button>
+        </form> -->
+        <div class="link row">
+          <div class="col l3">
+            <form method="post" href="/upvote/{{this.id}}" action="/upvote/{{this.id}}">
+                <button class="button">  <img src="/up-arrow.png" alt=""></button>
+                <input type="hidden" name="id" value="{{this.id}}">
+                <input type="hidden" name="votes" value="{{this.votes}}">
+            </form>
+            <span class="votes">{{this.votes}}</span>
+            <form method="post" href="/downvote/{{this.id}}" action="/downvote/{{this.id}}">
+                <button class="button">  <img src="/downarrow.png" alt=""></button>
+                <input type="hidden" name="id" value="{{this.id}}">
+                <input type="hidden" name="votes" value="{{this.votes}}">
+            </form>
+            <a href="/delete/{{this.id}}"><button>Delete</button></a>
+            <a href="/comments/{{id}}"><button>Comments</button></a>
+          </div>
+          <div class="col l9">
+            <span class="title">
+              <a href="{{this.url}}">{{this.title}}</a>
+            </span>
+          </div>
+        </div>
+
+      {{/each}}
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <!-- this is the CDN for jQuery -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <!-- cdn for bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/main">
+
+    </script>
+
+    <!-- this is the link to my JS file for index.html -->
+  </body>
+</html>
