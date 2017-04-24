@@ -12,8 +12,7 @@ exports.seed = function(knex, Promise) {
         password: "keyboardcat",
         admin: true,
         pixel_count: 100000,
-        picture_id: 1,
-        timestamp: "Today"
+        picture_id: 1
         },
         {
           name: "devin",
@@ -22,8 +21,7 @@ exports.seed = function(knex, Promise) {
           password: "keyboardcat",
           admin: false,
           pixel_count: 50,
-          picture_id: 1,
-          timestamp: "Today"
+          picture_id: 1
 
         },
         {
@@ -33,8 +31,7 @@ exports.seed = function(knex, Promise) {
           password: "keyboardcat",
           admin: false,
           pixel_count: 50,
-          picture_id: 1,
-          timestamp: "Today"
+          picture_id: 1
         }
       ]);
     });

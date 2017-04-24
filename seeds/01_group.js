@@ -1,18 +1,18 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('canvas').del()
+  return knex('group').del()
     .then(function () {
       // Inserts seed entries
-      return knex('canvas').insert([
+      return knex('group').insert([
         {
-          group_id: 1,
+          name: "g46"
         },
         {
-          group_id: 1,
+          name: "g51"
         },
         {
-          group_id: 1,
+          name: "g38"
         }
       ]);
     });
