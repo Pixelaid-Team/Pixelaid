@@ -39,6 +39,13 @@ require('./helpers/passport')(passport)
 app.use('/', index);
 app.use('/users', users);
 
+app.get('/canvas', (req, res) => {
+  res.render('canvas')
+})
+app.get('/questions', (req, res) => {
+  res.render('questions')
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -56,5 +63,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(3000,console.log('listening on 3000'))
 module.exports = app;
