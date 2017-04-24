@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('title').notNull()
     table.string('body')
-    table.integer('user_id').references('id').inTable('user')
+    table.integer('user_id').references('id').inTable('users')
     table.timestamp('created_at').defaultTo(knex.fn.now())
   })
 };
