@@ -9,7 +9,6 @@ exports.up = function(knex, Promise) {
     table.boolean('admin')
     table.integer('pixel_count')
     table.integer('picture_id').references('id').inTable('profile_picture')
-    table.timestamp('created_at').defaultTo(knex.fn.now())
   })
 };
 
