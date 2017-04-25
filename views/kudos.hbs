@@ -13,17 +13,19 @@
   </nav>
   <body class="container">
     <h1></h1>
-    <section class="addQuestion">
-      <form action="/add-questions" method="post">
+    <section class="giveKudo">
+      <form action="/giveKudo" method="post">
         <div>
-          <label for="title">Title</label>
-          <input type="text" name="title" value="">
+          <label for="to_user_id">Give Kudos To:</label>
+          <input type="text" name="to_user_id" value="">
         </div>
         <div>
-          <label for="body">Details</label>
+          <label for="body">Kudo Description</label>
           <input type="text" name="body" value="">
+          <label for="from_user_id">From:</label>
+          <input type="text" name="from_user_id" value="">
         </div>
-        <button>Add Question</button>
+        <button>Give Kudo</button>
       </form>
     </section>
     <main>
@@ -31,13 +33,11 @@
         <div class="questionOuterBox">
           <div class="col l9">
             <span class="title">
-              <h1>{{this.title}}</h1>
-              <h4>{{this.body}}</h4>
+              <h2>{{this.body}}</h2>
+              <h6>{{this.to_user_id}}</h6>
+              <h6>{{this.from_user_id}}</h6>
+
             </span>
-          </div>
-          <div class="col l3">
-            <a href="/delete/{{this.id}}"><button>Delete</button></a>
-            <a href="/answer/{{id}}"><button>Answers</button></a>
           </div>
         </div>
       {{/each}}

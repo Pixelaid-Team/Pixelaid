@@ -146,6 +146,25 @@ app.post('/endorse/:id', (req, res) => {
 })
 
 
+app.get("/kudos", (req, res)=>{
+ query.getKudos(req.params.id)
+  .then(data=>{
+    console.log(data);
+    res.render("kudos", {data})
+  })
+})
+
+app.post('/giveKudo', (req, res) => {
+  console.log(req.body);
+  query.giveKudo(req.body)
+  .then(data => {
+    res.redirect('/kudos', {data})
+  }).catch(function(error){
+    console.log('this is error:', error);
+  })
+})
+
+
 
 
 // catch 404 and forward to error handler
