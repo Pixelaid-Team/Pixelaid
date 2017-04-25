@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('username').unique()
     table.string('email').unique()
     table.string('password').notNull()
-    table.boolean('admin')
+    table.boolean('admin').defaultTo(false)
     table.integer('pixel_count')
     table.integer('picture_id').references('id').inTable('profile_picture')
   })
