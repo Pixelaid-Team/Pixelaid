@@ -14,7 +14,7 @@ function deleteQuestion(id){
 function getAnswer(id){
   return pg('answer')
   .fullOuterJoin('question', 'question.id', 'answer.question_id')
-  .select('*').where('question.id', '=', id)
+  .select('*', "answer.body as answer_body").where('question.id', '=', id)
 }
 
 //get the canvas and tables.
