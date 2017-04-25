@@ -6,22 +6,17 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/main.css">
   </head>
+  <nav>
+    <nav class="nav">
+      <a href="/questions">Questions</a>       <a href="/canvas">PixelBoard</a>
+      <a href="/kudos">Kudos</a>
+    </nav>
+  </nav>
   <body class="container">
     <section>
-
+      <a href="/questions">Back To Questions</a>
       <div class="link row">
         <div class="col l3">
-          <!-- <form method="post" href="/upvote/{{this.id}}" action="/upvote/{{this.id}}">
-              <button class="button">  <img src="/up-arrow.png" alt=""></button>
-              <input type="hidden" name="id" value="{{this.id}}">
-              <input type="hidden" name="votes" value="{{this.votes}}">
-          </form>
-          <span class="votes">{{votes}}</span>
-          <form method="post" href="/downvote/{{this.id}}" action="/downvote/{{this.id}}">
-              <button class="button">  <img src="/downarrow.png" alt=""></button>
-              <input type="hidden" name="id" value="{{this.id}}">
-              <input type="hidden" name="votes" value="{{this.votes}}">
-          </form> -->
         </div>
         <div class="col l9">
           <span class="title">
@@ -44,14 +39,18 @@
 
     </section>
     <section>
-
+      {{#each data}}
       <div class="link row">
-        {{#each data}}
-
-        <!-- <h5>username:{{this.username}}</h5> -->
-        <h6>{{this.body}}</h6>
-      {{/each}}
+        <form method="post" href="/endorse/{{this.id}}" action="/endorse/{{this.id}}">
+                <button class="button"><img src="/media/talk.png" alt=""></button>
+                <input type="hidden" name="answer_id" value="{{this.answer_id}}">
+                <input type="hidden" name="votes" value="{{this.votes}}">
+            </form>
+            <span class="votes">{{this.votes}}</span>
+        <h6>{{this.answer_body}}</h6>
       </div>
+      {{/each}}
+
     </section>
 
   </body>

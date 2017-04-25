@@ -3,17 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>PixelAid</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/style.css">
   </head>
   <body>
-    <form class="sign-in-form" action="/login" method="post">
-      <input type="text" name="username" placeholder="Username">
-      <input type="text" name="password" placeholder="Password">
-      <input type="submit" name="" value="Log In">
-    </form>
-    <h1>Working</h1>
-    <h1>{{info}}</h1>
-    <a href="/canvas">text</a>
-    <a href="/questions">text</a>
+    <div class="logo-container">
+      <img src="./media/pixelaid-logo.svg" alt="">
+    </div>
+
+    <div class="sign-in">
+      <form class="sign-in-form" action="/login" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="password" placeholder="Password">
+        <input type="submit" name="" value="Log In">
+      </form>
+      <p>{{error}}</p>
+    </div>
+
+
+    <a href="/signup"><button type="button">Sign Up</button></a>
+    <a href="/canvas">CANVAS</a>
+    <a href="/questions">QUESTIONS</a>
   </body>
 </html>
