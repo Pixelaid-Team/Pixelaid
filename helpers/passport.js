@@ -2,6 +2,7 @@ const pg = require("../db/knex");
 const passport = require("passport");
 const localStrategy = require('passport-local').Strategy
 const flash = require('connect-flash')
+const bcrypt = require('bcrypt')
 
 passport.use(new localStrategy({passReqToCallback: true}, authenticate))
 
@@ -10,11 +11,17 @@ function authenticate (req, username, password, done) {
   .where('username', username)
   .first()
   .then((user) => {
-    if (!user || user.password !== password) {
-      return done(null, false, req.flash('messages', {"error": 'Incorrect username or password'}))
+    if (!user) {
+      return done(null, false)
     }
-    console.log('hello');
-    done(null, user)
+    bcrypt.compare(password, user.password).then((res) => {
+      console.log(user.password);
+      if (res) {
+        done(null, user)
+      } else {
+        return done(null, false)
+      }
+    })
   }, done)
 }
 

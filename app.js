@@ -72,13 +72,18 @@ app.get('/signup', (req, res) => {
   res.render('signup')
 })
 
+const saltRounds = 10
+
 app.post('/signup', (req, res) => {
-  const salt = bcrypt.genSaltSync()
-  const hash = bcrypt.hashSync(req.body.password, salt)
-  return pg('users').insert({
-    username: req.body.username,
-    password: hash,
-    name: req.body.name
+  bcrypt.genSalt(saltRounds).then((salt) => {
+    console.log(salt);
+    bcrypt.hash(req.body.password, salt).then((hash) => {
+      return pg('users').insert({
+        username: req.body.username,
+        password: hash,
+        name: req.body.name
+      })
+    })
   })
   .then(() => {
     res.redirect('/')
