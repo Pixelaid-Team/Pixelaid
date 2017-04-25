@@ -7,6 +7,22 @@ a {
   color: #00B7FF;
 }
 
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-container img {
+  width: 50%;
+}
+
+.sign-in {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .signup-form {
   width: 100%;
   display: flex;
