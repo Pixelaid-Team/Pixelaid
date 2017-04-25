@@ -22,7 +22,7 @@ var auth = require('./routes/auth')
 const signup = require('./routes/signup')
 
 var app = express();
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5001
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -118,20 +118,30 @@ app.get("/delete/:id", (req, res)=> {
 
 
 app.get("/answer/:id", (req, res)=>{
-  query.getAnswer(req.params.id)
+ query.getAnswer(req.params.id)
   .then(data=>{
     console.log(data);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
-
   })
 })
+
 
 app.post("/addAnswer/:id", (req, res)=>{
   req.body.question_id = req.params.id
   let answerId = req.params.id
+  req.body['votes'] = 0
   query.addAnswer(req.body)
   .then(data =>{
     res.redirect("/answer/"+answerId)
+  })
+})
+
+app.post('/endorse/:id', (req, res) => {
+  console.log("this is endorsed");
+  let answerId = req.params.id
+  query.endorse(req.body)
+  .then(()=>{
+    res.redirect('/answer/'+answerId)
   })
 })
 
