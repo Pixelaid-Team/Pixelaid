@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require("passport");
 
+require('dotenv').config()
+
+require('./helpers/passport')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth')
 
 var app = express();
 
@@ -25,20 +29,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(session({
-//   secret: process.env.SECRET,
-//   name: 'i am a cookie',
-//   maxage: 3600000
-//   })
-// )
-
-//Passport authentication stuff
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+  })
+)
 app.use(passport.initialize())
-// app.use(passport.session())
-require('./helpers/passport')(passport)
+app.use(passport.session())
 
-app.use('/', index);
-app.use('/users', users);
+app.get('/', (req, res) => {
+  res.send({
+    session: req.session,
+    user: req.user,
+    authenticated: req.isAuthenticated()
+  })
+});
+app.use('/login', auth)
+// app.use('/users', users);
 
 app.get('/canvas', (req, res) => {
   res.render('canvas')
@@ -64,5 +72,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 app.listen(3000, console.log('listening on 3000'))
 module.exports = app;

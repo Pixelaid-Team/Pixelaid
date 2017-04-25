@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const knex = require('../db/knex')
-const db = require('../db/queries')
+const pg = require('../db/knex')
+const db = require('../db/query')
 const app = express()
 const passport = require('passport')
 
-const pg = require('../db/knex')
+app.get('/login', (req, res) => {
+  res.render('index')
+})
 
 app.post('/login',
   passport.authenticate('local', {
