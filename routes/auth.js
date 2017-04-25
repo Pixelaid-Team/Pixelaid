@@ -6,12 +6,12 @@ const app = express()
 const passport = require('passport')
 
 router.get('/login', (req, res, next) => {
-  res.render('index')
+  res.render('index', {error: 'Invalid username or password'})
 })
 
 router.post('/login',
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/canvas',
     failureRedirect: '/login',
     failureFlash: true })
 );
