@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var query = require('./db/query')
 require('dotenv').config()
 
 var index = require('./routes/index');
@@ -31,8 +32,22 @@ app.get('/canvas', (req, res) => {
   res.render('canvas')
 })
 app.get('/questions', (req, res) => {
-  res.render('questions')
+  query.getAll().then(data => {
+    res.render('questions', {data})
+  })
 })
+
+
+app.post('/add-questions', (req, res) => {
+  console.log(req.body);
+  query.add(req.body).then(() =>{
+    res.redirect('/questions')
+  }).catch(function(error){
+    console.log('this is error:', error);
+  })
+})
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,5 +66,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 app.listen(port,console.log('listening on 3000'))
 module.exports = app;

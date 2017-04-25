@@ -18,58 +18,32 @@
   <body class="container">
     <h1></h1>
     <section class="submit-link">
-      <form action="/add-link" method="post">
+      <form action="/add-questions" method="post">
         <div>
-          <label for="url">URL</label>
-          <input type="text" name="url" value="http://">
-        </div>
-        <div>
-          <label for="title">title</label>
+          <label for="title"><title>Home</title></label>
           <input type="text" name="title" value="">
         </div>
-        <button>Addlink</button>
+        <div>
+          <label for="body">Details</label>
+          <input type="text" name="body" value="">
+        </div>
+        <button>Add Questions</button>
       </form>
-    </section>
-    <section>
-      <a class="waves-effect waves-light btn" href="#modal1">Modal</a>
-
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>this is modal </p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-      </div>
     </section>
     <main>
 
 
       {{#each data}}
-        <!-- <form class="upvote" action="/upvote/((this.id))" method="post">
-          <button>-U-</button>
-        </form> -->
+
         <div class="link row">
           <div class="col l3">
-            <form method="post" href="/upvote/{{this.id}}" action="/upvote/{{this.id}}">
-                <button class="button">  <img src="/up-arrow.png" alt=""></button>
-                <input type="hidden" name="id" value="{{this.id}}">
-                <input type="hidden" name="votes" value="{{this.votes}}">
-            </form>
-            <span class="votes">{{this.votes}}</span>
-            <form method="post" href="/downvote/{{this.id}}" action="/downvote/{{this.id}}">
-                <button class="button">  <img src="/downarrow.png" alt=""></button>
-                <input type="hidden" name="id" value="{{this.id}}">
-                <input type="hidden" name="votes" value="{{this.votes}}">
-            </form>
             <a href="/delete/{{this.id}}"><button>Delete</button></a>
-            <a href="/comments/{{id}}"><button>Comments</button></a>
+            <a href="/answers/{{id}}"><button>Answers</button></a>
           </div>
           <div class="col l9">
             <span class="title">
-              <a href="{{this.url}}">{{this.title}}</a>
+              <h1>{{this.title}}</h1>
+              <h4>{{this.body}}</h4>
             </span>
           </div>
         </div>
