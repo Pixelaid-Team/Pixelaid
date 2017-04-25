@@ -72,17 +72,26 @@ app.get('/signup', (req, res) => {
 
 const saltRounds = 10
 
+// app.get('/signuperror', (req, res) => {
+//   res.render('signup', {error: "Username already exists"})
+// })
+
 app.post('/signup', (req, res) => {
-  bcrypt.genSalt(saltRounds).then((salt) => {
+  // if (pg('users').select('username').where('username', req.body.username)) {
+  //   res.redirect('/signuperror')
+  // }
+    bcrypt.genSalt(saltRounds)
+    .then((salt) => {
     console.log(salt);
-    bcrypt.hash(req.body.password, salt).then((hash) => {
-      return pg('users').insert({
+    bcrypt.hash(req.body.password, salt)
+    .then((hash) => {
+        return pg('users').insert({
         username: req.body.username,
         password: hash,
         name: req.body.name
+        })
       })
     })
-  })
   .then(() => {
     res.redirect('/')
   })

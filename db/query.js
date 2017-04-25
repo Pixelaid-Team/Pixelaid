@@ -4,6 +4,10 @@ function getAll(){
   return pg('question')
 }
 
+function findUserIfExists(obj) {
+  return pg('users').select()
+}
+
 function add(obj){
   return pg('question').insert(obj)
 }
@@ -41,6 +45,7 @@ function giveKudo(obj){
 
 module.exports={
   getAll,
+  findUserIfExists,
   add,
   deleteQuestion,
   getAnswer,
@@ -48,4 +53,5 @@ module.exports={
   endorse,
   getKudos,
   giveKudo
+
 }
