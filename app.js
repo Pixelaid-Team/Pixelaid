@@ -16,6 +16,7 @@ require('./helpers/passport')
 var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth')
+const signup = require('./routes/signup')
 
 var app = express();
 const port = process.env.PORT || 5000
@@ -42,7 +43,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-// app.use('/login', auth)
+app.use('/signup', signup)
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -54,17 +55,15 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.render('index')
+  res.render('index', {error: 'Incorrect username or password'})
 })
 
 app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/canvas',
-    failureRedirect: '/login',
-    failureFlash: 'shit failed' })
+    failureRedirect: '/login'
+  })
 );
-
-// app.use('/users', users);
 
 app.get('/canvas', (req, res) => {
   console.log(req.user);
@@ -76,7 +75,6 @@ app.get('/questions', (req, res) => {
     res.render('questions', {data})
   })
 })
-
 
 app.post('/add-questions', (req, res) => {
   console.log(req.body);
