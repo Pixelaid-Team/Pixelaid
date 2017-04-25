@@ -11,17 +11,6 @@
 
       <div class="link row">
         <div class="col l3">
-          <!-- <form method="post" href="/upvote/{{this.id}}" action="/upvote/{{this.id}}">
-              <button class="button">  <img src="/up-arrow.png" alt=""></button>
-              <input type="hidden" name="id" value="{{this.id}}">
-              <input type="hidden" name="votes" value="{{this.votes}}">
-          </form>
-          <span class="votes">{{votes}}</span>
-          <form method="post" href="/downvote/{{this.id}}" action="/downvote/{{this.id}}">
-              <button class="button">  <img src="/downarrow.png" alt=""></button>
-              <input type="hidden" name="id" value="{{this.id}}">
-              <input type="hidden" name="votes" value="{{this.votes}}">
-          </form> -->
         </div>
         <div class="col l9">
           <span class="title">
@@ -49,7 +38,7 @@
         {{#each data}}
 
         <!-- <h5>username:{{this.username}}</h5> -->
-        <h6>{{this.body}}</h6>
+        <h6>{{this.answer_body}}</h6>
       {{/each}}
       </div>
     </section>
