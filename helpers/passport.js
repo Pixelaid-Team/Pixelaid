@@ -11,7 +11,7 @@ function authenticate (req, username, password, done) {
   .first()
   .then((user) => {
     if (!user || user.password !== password) {
-      return done(null, false, req.flash('messages',{"error": 'Incorrect username or password'}))
+      return done(null, false, req.flash('messages', {"error": 'Incorrect username or password'}))
     }
     console.log('hello');
     done(null, user)

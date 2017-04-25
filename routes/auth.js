@@ -5,9 +5,9 @@ const db = require('../db/query')
 const app = express()
 const passport = require('passport')
 
-// router.get('/login', (req, res, next) => {
-//   res.render('index')
-// })
+router.get('/login', (req, res, next) => {
+  res.render('index')
+})
 
 router.post('/login',
   passport.authenticate('local', {
