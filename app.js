@@ -87,6 +87,34 @@ app.post('/add-questions', (req, res) => {
   })
 })
 
+app.get("/delete/:id", (req, res)=> {
+  console.log("deleted post");
+  query.deleteQuestion(req.params.id)
+  .then(()=>{
+    res.redirect('/questions')
+  })
+})
+
+
+app.get("/answer/:id", (req, res)=>{
+  query.getAnswer(req.params.id)
+  .then(data=>{
+    console.log(data);
+    res.render("answer", {data, title: data[0].title, body: data[0].body})
+
+  })
+})
+
+app.post("/addAnswer/:id", (req, res)=>{
+  req.body.question_id = req.params.id
+  let answerId = req.params.id
+  query.addAnswer(req.body)
+  .then(data =>{
+    res.redirect("/answer/"+answerId)
+  })
+})
+
+
 
 
 // catch 404 and forward to error handler
