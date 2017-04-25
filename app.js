@@ -97,10 +97,14 @@ app.post('/signup', (req, res) => {
   })
 })
 
+var currentUser = 'hey'
+
 app.get('/canvas', (req, res) => {
+  console.log(req.user);
+  currentUser = req.user
   query.getCanvas()
   .then(data => {
-    res.render('canvas', {data})
+    res.render('canvas', {data, currentUser})
   })
 })
 //this is to pass the canvas db to canvas.js
