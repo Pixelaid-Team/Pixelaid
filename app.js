@@ -5,13 +5,19 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var query = require('./db/query')
+var session = require('express-session');
+var passport = require("passport");
+
 require('dotenv').config()
+
+require('./helpers/passport')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth')
 
 var app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +31,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+
+// app.use('/login', auth)
+
+app.get('/', (req, res) => {
+  console.log('hey');
+  res.send({
+    session: req.session,
+    user: req.user,
+    authenticated: req.isAuthenticated()
+  })
+});
+
+app.get('/login', (req, res) => {
+  res.render('index')
+})
+
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: true })
+);
+
+// app.use('/users', users);
 
 app.get('/canvas', (req, res) => {
   res.render('canvas')
@@ -68,5 +104,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(port,console.log('listening on 3000'))
+app.listen(port, console.log('listening on ' + port))
+
 module.exports = app;
