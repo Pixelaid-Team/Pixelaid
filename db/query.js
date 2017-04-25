@@ -21,9 +21,12 @@ function getAnswer(id){
   .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id).orderBy('votes', 'desc')
 }
 
+//get the canvas and tables.
+function getCanvas(){
+  return pg('section')
+}
 
 function addAnswer(obj){
-  console.log(obj);
   return pg('answer').insert(obj)
 }
 
@@ -50,6 +53,7 @@ module.exports={
   deleteQuestion,
   getAnswer,
   addAnswer,
+  getCanvas,
   endorse,
   getKudos,
   giveKudo

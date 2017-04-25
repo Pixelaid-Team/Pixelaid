@@ -1,4 +1,51 @@
 main{
   display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.section{
+  display:flex;
+  flex-wrap:wrap;
+  box-sizing: content-box;
+  color:transparent;
+}
+.section:hover{
+  opacity: .5;
+  color:black;
+}
+.posP{
+  position: absolute;
+}
+#canvasFrame{
+  border:1px solid black;
+  display:flex;
+  flex-wrap:wrap;
+  width: 192px;
+  height: 64px;
+  box-sizing: content-box;
+}
+
+
+.modal{
+  display:none;
+  position:fixed;
+  z-index: 1;
+  width:500px;
+  height:500px;
+  /*opacity: .5;*/
+  background-color: rgb(152, 152, 152);
+
   justify-content: center;
+  align-items: center;
+}
+#modalCanvas{
+  border:1px solid black;
+  width:320px;
+  height:320px;
+  display:flex;
+  flex-wrap:wrap;
+}
+.editPixel{
+  width:20px;
+  height:20px;
 }
