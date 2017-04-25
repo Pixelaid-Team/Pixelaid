@@ -17,10 +17,11 @@ function getAnswer(id){
   .select('*').where('question.id', '=', id)
 }
 
+//get the canvas and tables.
+function getCanvas()
+
 function addAnswer(obj){
-
   return pg('answer').insert(obj)
-
 }
 
 module.exports={
