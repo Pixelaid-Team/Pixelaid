@@ -67,10 +67,19 @@ app.post('/login',
 // app.use('/users', users);
 
 app.get('/canvas', (req, res) => {
-  console.log(req.user);
-  let currentUser = req.user
-  res.render('canvas', {currentUser})
+  query.getCanvas()
+  .then(data => {
+    res.render('canvas', {data})
+  })
 })
+//this is to pass the canvas db to canvas.js
+app.get('/data', function(req, res){
+  query.getCanvas()
+  .then(data => {
+    res.json(data)
+  })
+})
+
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
     res.render('questions', {data})

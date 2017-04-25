@@ -18,7 +18,9 @@ function getAnswer(id){
 }
 
 //get the canvas and tables.
-function getCanvas()
+function getCanvas(){
+  return pg('section')
+}
 
 function addAnswer(obj){
   return pg('answer').insert(obj)
@@ -29,6 +31,7 @@ module.exports={
   add,
   deleteQuestion,
   getAnswer,
-  addAnswer
+  addAnswer,
+  getCanvas
 
 }
