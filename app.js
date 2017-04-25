@@ -8,6 +8,9 @@ var query = require('./db/query')
 var session = require('express-session');
 var passport = require("passport");
 var flash = require('connect-flash')
+var bcrypt = require('bcrypt')
+const pg = require('./db/knex')
+
 
 require('dotenv').config()
 
@@ -43,7 +46,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-app.use('/signup', signup)
+// app.use('/signup', signup)
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -64,6 +67,23 @@ app.post('/login',
     failureRedirect: '/login'
   })
 );
+
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
+
+app.post('/signup', (req, res) => {
+  const salt = bcrypt.genSaltSync()
+  const hash = bcrypt.hashSync(req.body.password, salt)
+  return pg('users').insert({
+    username: req.body.username,
+    password: hash,
+    name: req.body.name
+  })
+  .then(() => {
+    res.redirect('/')
+  })
+})
 
 app.get('/canvas', (req, res) => {
   console.log(req.user);
