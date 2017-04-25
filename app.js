@@ -8,6 +8,9 @@ var query = require('./db/query')
 var session = require('express-session');
 var passport = require("passport");
 var flash = require('connect-flash')
+var bcrypt = require('bcrypt')
+const pg = require('./db/knex')
+
 
 require('dotenv').config()
 
@@ -16,9 +19,10 @@ require('./helpers/passport')
 var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth')
+const signup = require('./routes/signup')
 
 var app = express();
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5001
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,8 +46,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-// app.use('/login', auth)
-
 app.get('/', (req, res) => {
   res.render('index')
   // res.send({
@@ -54,17 +56,37 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.render('index')
+  res.render('index', {error: 'Incorrect username or password'})
 })
 
 app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/canvas',
-    failureRedirect: '/login',
-    failureFlash: 'shit failed' })
+    failureRedirect: '/login'
+  })
 );
 
-// app.use('/users', users);
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
+
+const saltRounds = 10
+
+app.post('/signup', (req, res) => {
+  bcrypt.genSalt(saltRounds).then((salt) => {
+    console.log(salt);
+    bcrypt.hash(req.body.password, salt).then((hash) => {
+      return pg('users').insert({
+        username: req.body.username,
+        password: hash,
+        name: req.body.name
+      })
+    })
+  })
+  .then(() => {
+    res.redirect('/')
+  })
+})
 
 app.get('/canvas', (req, res) => {
   console.log(req.user);
@@ -76,7 +98,6 @@ app.get('/questions', (req, res) => {
     res.render('questions', {data})
   })
 })
-
 
 app.post('/add-questions', (req, res) => {
   console.log(req.body);
@@ -97,20 +118,30 @@ app.get("/delete/:id", (req, res)=> {
 
 
 app.get("/answer/:id", (req, res)=>{
-  query.getAnswer(req.params.id)
+ query.getAnswer(req.params.id)
   .then(data=>{
     console.log(data);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
-
   })
 })
+
 
 app.post("/addAnswer/:id", (req, res)=>{
   req.body.question_id = req.params.id
   let answerId = req.params.id
+  req.body['votes'] = 0
   query.addAnswer(req.body)
   .then(data =>{
     res.redirect("/answer/"+answerId)
+  })
+})
+
+app.post('/endorse/:id', (req, res) => {
+  console.log("this is endorsed");
+  let answerId = req.params.id
+  query.endorse(req.body)
+  .then(()=>{
+    res.redirect('/answer/'+answerId)
   })
 })
 
