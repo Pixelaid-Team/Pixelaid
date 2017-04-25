@@ -3,51 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Questions</title>
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/questions.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
-  <nav class="nav z-depth-1">
-    <div class="nav-wrapper">
-      <a class="brand-logo"><img src="/reddit-logo.png" alt="" class="navLogo"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <!-- <li><a href="/index">Page2</a></li> -->
-        <!-- <li><a href="/incubate">Page3</a></li> -->
-      </ul>
-    </div>
+  <nav class="nav">
+    <a href="/questions">Questions</a>           <a href="/canvas">PixelBoard</a>
   </nav>
   <body class="container">
     <h1></h1>
-    <section class="submit-link">
+    <section class="addQuestion">
       <form action="/add-questions" method="post">
         <div>
-          <label for="title"><title>Home</title></label>
+          <label for="title">Title</label>
           <input type="text" name="title" value="">
         </div>
         <div>
           <label for="body">Details</label>
           <input type="text" name="body" value="">
         </div>
-        <button>Add Questions</button>
+        <button>Add Question</button>
       </form>
     </section>
     <main>
-
-
       {{#each data}}
-
-        <div class="link row">
-          <div class="col l3">
-            <a href="/delete/{{this.id}}"><button>Delete</button></a>
-            <a href="/answer/{{id}}"><button>Answers</button></a>
-          </div>
+        <div class="questionOuterBox">
           <div class="col l9">
             <span class="title">
               <h1>{{this.title}}</h1>
               <h4>{{this.body}}</h4>
             </span>
           </div>
+          <div class="col l3">
+            <a href="/delete/{{this.id}}"><button>Delete</button></a>
+            <a href="/answer/{{id}}"><button>Answers</button></a>
+          </div>
         </div>
-
       {{/each}}
     </main>
 

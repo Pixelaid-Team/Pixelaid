@@ -6,9 +6,14 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/main.css">
   </head>
+  <nav>
+    <nav class="nav">
+      <a href="/questions">Questions</a>           <a href="/canvas">PixelBoard</a>
+    </nav>
+  </nav>
   <body class="container">
     <section>
-
+      <a href="/questions">Back To Questions</a>
       <div class="link row">
         <div class="col l3">
         </div>
@@ -33,14 +38,18 @@
 
     </section>
     <section>
-
+      {{#each data}}
       <div class="link row">
-        {{#each data}}
-
-        <!-- <h5>username:{{this.username}}</h5> -->
+        <form method="post" href="/endorse/{{this.id}}" action="/endorse/{{this.id}}">
+                <button class="button"><img src="/media/talk.png" alt=""></button>
+                <input type="hidden" name="answer_id" value="{{this.answer_id}}">
+                <input type="hidden" name="votes" value="{{this.votes}}">
+            </form>
+            <span class="votes">{{this.votes}}</span>
         <h6>{{this.answer_body}}</h6>
-      {{/each}}
       </div>
+      {{/each}}
+
     </section>
 
   </body>
