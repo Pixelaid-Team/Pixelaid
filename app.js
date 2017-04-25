@@ -46,8 +46,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-// app.use('/signup', signup)
-
 app.get('/', (req, res) => {
   res.render('index')
   // res.send({
