@@ -1,0 +1,24 @@
+html{
+  font-family: mplus-1p, Helvetica, arial, freesans, clean, sans-serif;
+
+}
+nav{
+  background-color: #CEE3F8;
+}
+.navLogo{
+  width: 15%;
+}
+.brand-logo{
+  padding-right: 20%
+}
+.button{
+  background-color: white;
+    border: 0px;
+}
+.row{
+  border: .5px solid black;
+
+}
+.votes{
+  padding-left: 1vw;
+}
