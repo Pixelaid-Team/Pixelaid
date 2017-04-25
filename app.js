@@ -39,14 +39,28 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// app.use('/login', auth)
+
 app.get('/', (req, res) => {
+  console.log('hey');
   res.send({
     session: req.session,
     user: req.user,
     authenticated: req.isAuthenticated()
   })
 });
-app.use('/login', auth)
+
+app.get('/login', (req, res) => {
+  res.render('index')
+})
+
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: true })
+);
+
 // app.use('/users', users);
 
 app.get('/canvas', (req, res) => {

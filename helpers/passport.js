@@ -10,14 +10,14 @@ function authenticate (username, password, done) {
   .first()
   .then((user) => {
     if (!user || user.password !== password) {
-      return done(null, false, {message: "Invalid username or password"})
+      return done(null, false, req.flash('loginMessage','Incorrect username.'))
     }
-
+    console.log('hello');
     done(null, user)
   }, done)
 }
 
-passport.serializeUser(function(id, done) {
+passport.serializeUser(function(user, done) {
   done(null, user.id)
 })
 

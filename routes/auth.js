@@ -5,7 +5,7 @@ const db = require('../db/query')
 const app = express()
 const passport = require('passport')
 
-app.get('/login', (req, res) => {
+router.get('/login', (req, res, next) => {
   res.render('index')
 })
 
