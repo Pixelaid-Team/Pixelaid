@@ -65,10 +65,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-<<<<<<< HEAD
-app.listen(5000,console.log('listening on 5000'))
-=======
 app.listen(port, console.log('listening on ' + port))
->>>>>>> 0ddc22a988ff03012d3c5b90083a6ffd25af1b36
 
 module.exports = app;
