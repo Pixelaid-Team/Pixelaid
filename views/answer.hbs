@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/main.css">
+  </head>
+  <body class="container">
+    <section>
+
+      <div class="link row">
+        <div class="col l3">
+          <!-- <form method="post" href="/upvote/{{this.id}}" action="/upvote/{{this.id}}">
+              <button class="button">  <img src="/up-arrow.png" alt=""></button>
+              <input type="hidden" name="id" value="{{this.id}}">
+              <input type="hidden" name="votes" value="{{this.votes}}">
+          </form>
+          <span class="votes">{{votes}}</span>
+          <form method="post" href="/downvote/{{this.id}}" action="/downvote/{{this.id}}">
+              <button class="button">  <img src="/downarrow.png" alt=""></button>
+              <input type="hidden" name="id" value="{{this.id}}">
+              <input type="hidden" name="votes" value="{{this.votes}}">
+          </form> -->
+        </div>
+        <div class="col l9">
+          <span class="title">
+            <h1>{{title}}</h1>
+            <h4>{{body}}</h4>
+          </span>
+        </div>
+      </div>
+    </section>
+    <section>
+      {{#each data}}
+      <form action="/addAnswer/{{id}}" method="post">
+          {{/each}}
+        <div>
+          <label for="body">answer</label>
+          <input type="text" name="body" value="">
+        </div>
+        <button>Add answer</button>
+      </form>
+
+    </section>
+    <section>
+
+      <div class="link row">
+        {{#each data}}
+
+        <!-- <h5>username:{{this.username}}</h5> -->
+        <h6>{{this.body}}</h6>
+      {{/each}}
+      </div>
+    </section>
+
+  </body>
+</html>

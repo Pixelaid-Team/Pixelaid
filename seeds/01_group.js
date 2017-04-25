@@ -9,10 +9,10 @@ exports.seed = function(knex, Promise) {
           name: "g46"
         },
         {
-          name: "g51"
+          name: "g46"
         },
         {
-          name: "g38"
+          name: "g51"
         }
       ]);
     });
