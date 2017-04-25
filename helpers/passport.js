@@ -1,16 +1,17 @@
 const pg = require("../db/knex");
 const passport = require("passport");
 const localStrategy = require('passport-local').Strategy
+const flash = require('connect-flash')
 
-passport.use(new localStrategy(authenticate))
+passport.use(new localStrategy({passReqToCallback: true}, authenticate))
 
-function authenticate (username, password, done) {
+function authenticate (req, username, password, done) {
   pg('users')
   .where('username', username)
   .first()
   .then((user) => {
     if (!user || user.password !== password) {
-      return done(null, false, req.flash('loginMessage','Incorrect username.'))
+      return done(null, false, req.flash('messages',{"error": 'Incorrect username or password'}))
     }
     console.log('hello');
     done(null, user)
@@ -29,6 +30,8 @@ passport.deserializeUser(function(id, done) {
     done(null, user)
   }, done)
 })
+
+module.exports = passport
 
 
 

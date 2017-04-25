@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var query = require('./db/query')
 var session = require('express-session');
 var passport = require("passport");
+const flash = require('connect-flash')
 
 require('dotenv').config()
 
@@ -39,25 +40,22 @@ app.use(session({
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())
 
 // app.use('/login', auth)
 
 app.get('/', (req, res) => {
-  console.log('hey');
-  res.send({
-    session: req.session,
-    user: req.user,
-    authenticated: req.isAuthenticated()
-  })
-});
-
-app.get('/login', (req, res) => {
   res.render('index')
-})
+  // res.send({
+  //   session: req.session,
+  //   user: req.user,
+  //   authenticated: req.isAuthenticated()
+  // })
+});
 
 app.post('/login',
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/canvas',
     failureRedirect: '/',
     failureFlash: true })
 );
@@ -65,7 +63,9 @@ app.post('/login',
 // app.use('/users', users);
 
 app.get('/canvas', (req, res) => {
-  res.render('canvas')
+  console.log(req.user);
+  let currentUser = req.user
+  res.render('canvas', {currentUser})
 })
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
