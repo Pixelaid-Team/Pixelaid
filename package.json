@@ -6,6 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.45.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "connect-flash": "^0.1.1",
