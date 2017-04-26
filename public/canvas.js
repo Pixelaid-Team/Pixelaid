@@ -37,8 +37,10 @@ $(document).ready(function(){
         //FIX cancel and erase the sectionArr here!
         //console.log(sectionArr);
         modal.style.display = "flex"
+
         drawSection(fullPic, secDiv.id)
         selectColor(selectedColor)
+
       }
     })
 

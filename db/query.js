@@ -50,10 +50,18 @@ function updateCanvas(obj){
   })
 }
 
-//subtract pixels from user total
-function subtractPixels(data){
 
+//subtract pixels from user total
+function subtractPixels (data, id, pixel) {
+  console.log(data["json"]);
+  console.log(pixel);
+  var count = pixel - +data["json"]
+  console.log(data);
+  console.log(pixel);
+  return pg('users').where('id', id).update({'pixel_count': count})
 }
+
+
 
 function addAnswer(obj, id){
   return pg('answer').insert({

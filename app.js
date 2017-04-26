@@ -128,9 +128,11 @@ app.post('/updateCanvas', (req, res) =>{
     res.redirect('canvas')
   })
 })
+
+
 //subtract from the user's pixel count
 app.post('/subtractPixels', (req, res) => {
-  query.subtractPixels(req.body)
+  query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
   .then(() => {
     res.redirect('canvas')
   })
