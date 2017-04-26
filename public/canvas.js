@@ -2,6 +2,7 @@ var sectionSize = 128,
   sectionRows = 3,
   sectionCols = 3,
   modalUp = false,
+  userPixels = 0,
   pixelsUsed = 0,
   sectionArr = [],
   sectionId = "",
@@ -16,12 +17,11 @@ var colorDiv = $('#colorDiv')
 //on document ready
 $(document).ready(function(){
   console.log("js connected");
-  $.get('/data').then(function(data, user){
+  $.get('/data').then(function(data){
 
     var fullPic = unpack(data)
     console.log(data);
     console.log("?");
-    console.log(user);
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
@@ -59,6 +59,7 @@ $(document).ready(function(){
       let newData = pack(sectionArr, sectionId)
       console.log(newData);
       PostObjectToUrl("/updateCanvas", newData)
+      subtractPixels("/subtractPixels", pixelsUsed)
 
     })
 
@@ -76,6 +77,8 @@ $(document).ready(function(){
         let xx = event.target.getAttribute('x')
         sectionArr[yy][xx] = getChar(selectedColor)
         event.target.style.backgroundColor = selectedColor
+        pixelsUsed += 1
+        $('#spendPixels').text(pixelsUsed)
         //console.log(selectedColor);
         //console.log(sectionArr);
         //console.log(fullPic);
@@ -115,6 +118,12 @@ function drawCanvas(arr){
 //create single selected section with color palette
 function drawSection(obj, pos){
   $('#modalPos').text(pos)
+  $('#spendPixels').text(pixelsUsed)
+
+  let tempPixel = $('#userPixels').text()
+  userPixel = +tempPixel
+
+
   let arr = obj[pos]
   for (let i = 2; i < arr.length; i++) {
     for (let n = 0; n < arr[i].length; n++) {
@@ -214,6 +223,22 @@ function PostObjectToUrl(url, obj){
       form.appendChild(input);
       document.body.appendChild(form);
       form.submit();
+}
+
+function subtractPixels(url, val){
+
+        var form, input;
+        //json = JSON.stringify(obj);
+
+        form = document.createElement("form");
+        form.method = "post";
+        form.action = url;
+        input = document.createElement("input");
+        input.setAttribute("name", "json");
+        input.setAttribute("value", val);
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
 }
 
 //return color from character

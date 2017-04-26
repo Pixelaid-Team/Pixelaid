@@ -50,6 +50,11 @@ function updateCanvas(obj){
   })
 }
 
+//subtract pixels from user total
+function subtractPixels(data){
+
+}
+
 function addAnswer(obj, id){
   return pg('answer').insert({
     body: obj.body,
@@ -93,5 +98,6 @@ module.exports={
   endorse,
   getKudos,
   giveKudo,
-  addPixel
+  addPixel,
+  subtractPixels
 }
