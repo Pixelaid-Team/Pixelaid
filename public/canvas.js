@@ -5,9 +5,9 @@ var sectionSize = 128,
   pixelsUsed = 0,
   sectionArr = [],
   sectionId = "",
-  selectedColor = "rgb(255, 255, 255)"
+  selectedColor = "rgb(255, 255, 255)";
 
-const colors = ["G","Y","R","B","V","O","W","E","L"]
+var colors = ["G","Y","R","B","V","O","W","E","L"]
 var modal = document.getElementById('myModal')
 var modalCanvas = $('#modalCanvas')
 var palette = $('#palette')
@@ -20,6 +20,7 @@ $(document).ready(function(){
 
     var fullPic = unpack(data)
     console.log(data);
+    console.log("?");
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
