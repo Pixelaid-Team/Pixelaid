@@ -16,11 +16,12 @@ var colorDiv = $('#colorDiv')
 //on document ready
 $(document).ready(function(){
   console.log("js connected");
-  $.get('/data').then(function(data){
+  $.get('/data').then(function(data, user){
 
     var fullPic = unpack(data)
     console.log(data);
     console.log("?");
+    console.log(user);
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
