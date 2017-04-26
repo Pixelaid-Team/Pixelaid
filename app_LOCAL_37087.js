@@ -37,7 +37,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: process.env.SECRET,
+  key: process.env.S3_KEY,
+  secret: process.env.S3_SECRET,
   resave: false,
   saveUninitialized: false
   })
