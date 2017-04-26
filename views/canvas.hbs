@@ -10,11 +10,10 @@
     <main>
       <h1>Hello World</h1>
       <div id="canvasFrame"></div>
-
       <div id="myModal" class="modal">
         <div class="modalHeader">
           <h2 id="modalPos">0,0</h2>
-          <h2 id="">User: <span>{{user}}</span></h2>
+          <h2 id="">User:</h2>
           <div>
             <h2>Pixels: <span id="userPixels"></span></h2>
             <h2>Pixels: <span id="spendPixels"></span></h2>
@@ -34,6 +33,12 @@
         </div>
       </div>
     </main>
-  <script src="canvas.js"></script>
+    <h1>{{currentUser.name}}</h1>
+    <h2>{{currentUser.pixel_count}} pixels</h2>
+    <a href="/questions">questions</a>
+    <footer>
+      <a href="/logout"><button class="logout">Logout</button></a>
+    </footer>
+    <script src="canvas.js"></script>
   </body>
 </html>
