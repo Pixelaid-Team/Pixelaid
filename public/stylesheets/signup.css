@@ -1,0 +1,68 @@
+.parallax {
+  height: 100vh;
+  background-image: url('../media/mobile-background2.png');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -5vh;
+}
+
+.logo-container img {
+  width: 77%;
+}
+
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form form {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  padding: 11px 0;
+}
+
+.signup-form input {
+  width: 95%;
+  font-size: 1.75em;
+  font-family: 'Nova Square', sans-serif;
+  margin: 11px 0;
+}
+
+.signup-button {
+  border: none;
+  background-color: yellow;
+  color: black;
+  cursor: pointer;
+  padding: 7px 0;
+}
+
+@media(min-width: 800) {
+  .parallax {
+    background-image: url('../media/tablet-background.png');
+  }
+}
+
+@media (min-width: 1000px) {
+  .parallax {
+    background-image: url('../media/desktop-background.png');
+  }
+
+  .logo-container img {
+    width: 50%;
+  }
+}

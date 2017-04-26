@@ -94,6 +94,7 @@ app.post('/signup', (req, res) => {
         return pg('users').insert({
         username: req.body.username,
         password: hash,
+        email: req.body.email,
         name: req.body.name,
         pixel_count: 31
         })
