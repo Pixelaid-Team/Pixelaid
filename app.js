@@ -180,12 +180,20 @@ app.post("/addAnswer/:id", (req, res)=>{
   })
 })
 
+app.get('/endorsePixel/:id', (req, res) => {
+  let answerId = req.params.id
+  query.addPixel(req.user)
+  .then(data => {
+    res.redirect('/answer/' + answerId)
+  })
+})
+
 app.post('/endorse/:id', (req, res) => {
   console.log("this is endorsed");
   let answerId = req.params.id
   query.endorse(req.body)
   .then(()=>{
-    res.redirect('/answer/' + answerId)
+    res.redirect('/endorsePixel/' + answerId)
   })
 })
 

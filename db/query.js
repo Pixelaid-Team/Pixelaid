@@ -69,6 +69,7 @@ function endorse(obj){
   return pg('answer').where('id', obj['answer_id']).update('votes', +obj['votes'] + 1)
 }
 
+
 function getKudos(id){
   return pg('kudo')
   .fullOuterJoin('kudo', 'kudo.from_user_id', 'answer.question_id')
