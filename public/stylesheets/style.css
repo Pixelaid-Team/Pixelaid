@@ -15,6 +15,10 @@ a {
 
 .parallax {
   height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .logo-container {
@@ -123,14 +127,45 @@ a {
 .gamification h2 {
   width: 100%;
   text-align: center;
+  font-size: 2.5em;
+  font-family: 'VT323', sans-serif;
+  margin: 17px 0;
+}
+
+.game-shit {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .game-stats {
-  width: 50%;
+  width: 61vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.27em;
+  text-align: center;
+}
+
+.game-stats p {
+  margin: 11px 0;
+}
+
+#imp-game-stats {
+  font-size: 1.55em;
+}
+
+.rplace-image {
+  display: flex;
+  justify-content: center;
+  width: 30%;
 }
 
 .rplace-image img {
-  width: 30%;
+  width: 87%;
+  height: 87%;
 }
 
 .signup-form {
