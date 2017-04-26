@@ -37,7 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: process.env.SECRET,
+  secret: process.env.S3_SECRET,
   resave: false,
   saveUninitialized: false
   })
@@ -65,12 +65,6 @@ app.post('/login',
     failureRedirect: '/login'
   })
 );
-
-app.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    res.redirect('/')
-  })
-})
 
 app.get('/signup', (req, res) => {
   res.render('signup')
@@ -115,20 +109,12 @@ app.get('/canvas', (req, res) => {
   })
 })
 //this is to pass the canvas db to canvas.js
-app.get('/data', (req, res)=>{
+app.get('/data', function(req, res){
   query.getCanvas()
   .then(data => {
     res.json(data)
   })
 })
-//update the canvas DB
-app.post('/updateCanvas', (req, res) =>{
-  query.updateCanvas(req.body)
-  .then(() => {
-    res.redirect('canvas')
-  })
-})
-
 
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
@@ -157,26 +143,19 @@ app.get("/delete/:id", (req, res)=> {
 app.get("/answer/:id", (req, res)=>{
  query.getAnswer(req.params.id)
   .then(data=>{
-    // console.log(data);
+    console.log(data);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
   })
 })
 
-app.get('/answerpixel/:id', (req, res) => {
-  let answerId = req.params.id
-  query.addPixel(req.user)
-  .then(data => {
-    res.redirect('/answer/' + answerId)
-  })
-})
 
 app.post("/addAnswer/:id", (req, res)=>{
   req.body.question_id = req.params.id
   let answerId = req.params.id
   req.body['votes'] = 0
-  query.addAnswer(req.body, req.user.id)
+  query.addAnswer(req.body)
   .then(data =>{
-    res.redirect("/answerpixel/" + answerId)
+    res.redirect("/answer/"+answerId)
   })
 })
 
@@ -185,7 +164,7 @@ app.post('/endorse/:id', (req, res) => {
   let answerId = req.params.id
   query.endorse(req.body)
   .then(()=>{
-    res.redirect('/answer/' + answerId)
+    res.redirect('/answer/'+answerId)
   })
 })
 
