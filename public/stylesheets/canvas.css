@@ -3,6 +3,9 @@ main{
   flex-direction:column;
   align-items:center;
 }
+h2{
+  margin:10px;
+}
 .section{
   display:flex;
   flex-wrap:wrap;
@@ -20,8 +23,10 @@ main{
   border:1px solid black;
   display:flex;
   flex-wrap:wrap;
-  width: 192px;
-  height: 64px;
+  min-width: 192px;
+  max-width: 192px;
+  min-height: 64px;
+  max-height: 64px;
   box-sizing: content-box;
 }
 
@@ -30,22 +35,74 @@ main{
   display:none;
   position:fixed;
   z-index: 1;
-  width:500px;
-  height:500px;
+  width:450px;
+  height:425px;
   /*opacity: .5;*/
   background-color: rgb(152, 152, 152);
 
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.modalHeader, .modalFooter{
+  width: 80%;
+  display: flex;
+  justify-content:space-between;
+}
+.modalMain{
+  width:100%;
+  display:flex;
+  justify-content: space-around;
+  flex-direction: row;
   align-items: center;
 }
 #modalCanvas{
   border:1px solid black;
-  width:320px;
-  height:320px;
+  min-width:320px;
+  max-width:320px;
+  min-height:320px;
+  max-height:320px;
   display:flex;
   flex-wrap:wrap;
 }
 .editPixel{
   width:20px;
   height:20px;
+}
+.editPixel:hover{
+  opacity: .5;
+  color:black;
+}
+#palette{
+  border:1px solid black;
+  width:32px;
+  height:288px;
+  display:flex;
+  flex-wrap:wrap;
+}
+#colorDiv{
+  border:1px solid black;
+  width:32px;
+  height:32px;
+}
+.colorpick{
+  width: 45px;
+  height:150px;
+  display:flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.color{
+  width:32px;
+  height:32px;
+}
+.color:hover{
+  opacity: .5;
+  color:black;
+}
+.modalBtn{
+  width:75px;
+  height:30px;
 }

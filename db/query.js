@@ -23,9 +23,33 @@ function getAnswer(id){
 
 //get the canvas and tables.
 function getCanvas(){
-  return pg('section')
+  return pg('section').orderBy('id', 'asc')
 }
+//update teh canvas
+function updateCanvas(obj){
+  let temp = obj['json']
+  let newObj = JSON.parse(temp)
+  console.log(newObj);
+  return pg('section').where('id', newObj['id']).update({
+    'row_0': newObj[0],
+    'row_1': newObj[1],
+    'row_2': newObj[2],
+    'row_3': newObj[3],
+    'row_4': newObj[4],
+    'row_5': newObj[5],
+    'row_6': newObj[6],
+    'row_7': newObj[7],
+    'row_8': newObj[8],
+    'row_9': newObj[9],
+    'row_10': newObj[10],
+    'row_11': newObj[11],
+    'row_12': newObj[12],
+    'row_13': newObj[13],
+    'row_14': newObj[14],
+    'row_15': newObj[15]
+  })
 
+}
 function addAnswer(obj){
   return pg('answer').insert(obj)
 }
@@ -54,6 +78,7 @@ module.exports={
   getAnswer,
   addAnswer,
   getCanvas,
+  updateCanvas,
   endorse,
   getKudos,
   giveKudo

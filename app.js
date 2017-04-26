@@ -104,12 +104,20 @@ app.get('/canvas', (req, res) => {
   })
 })
 //this is to pass the canvas db to canvas.js
-app.get('/data', function(req, res){
+app.get('/data', (req, res)=>{
   query.getCanvas()
   .then(data => {
     res.json(data)
   })
 })
+//update the canvas DB
+app.post('/updateCanvas', (req, res) =>{
+  query.updateCanvas(req.body)
+  .then(() => {
+    res.redirect('canvas')
+  })
+})
+
 
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {

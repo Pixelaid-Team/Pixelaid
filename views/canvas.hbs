@@ -2,14 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/canvas.css"/>
-=======
->>>>>>> 6dc6506b19032854402e3a60f7d67e32e6779548
     <title>g46 canvas</title>
-    <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
-    <link rel="stylesheet" href="./stylesheets/canvas.css"/>
   </head>
   <body>
     <main>
@@ -17,15 +12,25 @@
       <div id="canvasFrame"></div>
 
       <div id="myModal" class="modal">
-        <div id="modalCanvas"></div>
+        <div class="modalHeader">
+          <h2 id="modalPos">0,0</h2>
+          <h2 id="">User:</h2>
+          <h2 id="">Pixels:</h2>
+        </div>
+        <div class="modalMain">
+          <div class="colorpick">
+            <p>Selected Color</p>
+            <div id="colorDiv"></div>
+          </div>
+          <div id="modalCanvas"></div>
+          <div id="palette"></div>
+        </div>
+        <div class="modalFooter">
+          <button id="modalCancel" class="modalBtn">Cancel</button>
+          <button id="modalSubmit" class="modalBtn">Submit</button>
+        </div>
       </div>
     </main>
-<<<<<<< HEAD
-=======
-    <h1>hurray</h1>
-    <h1>{{currentUser.name}}</h1>
-    <h2>{{currentUser.pixel_count}}</h2>
->>>>>>> 6dc6506b19032854402e3a60f7d67e32e6779548
   <script src="canvas.js"></script>
   </body>
 </html>
