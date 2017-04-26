@@ -1,5 +1,5 @@
 html{
-  font-family: mplus-1p, Helvetica, arial, freesans, clean, sans-serif;
+  font-family: "Nova Square", Helvetica, arial, freesans, clean, sans-serif;
 
 }
 nav{
@@ -21,4 +21,41 @@ nav{
 }
 .votes{
   padding-left: 1vw;
+}
+
+@media(min-width: 800) {
+  .parallax {
+
+  }
+}
+
+@media (min-width: 1000px) {
+  .parallax {
+
+  }
+
+  .logo-container img {
+    width: 50%;
+  }
+
+  .sign-in form {
+    width: 30%;
+    height: 100%;
+  }
+
+  .sign-in-form input {
+    width: 70%;
+    font-size: 1.5em;
+    font-family: 'Nova Square', sans-serif;
+    margin: 11px 0;
+  }
+
+  .questions-header {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  img {
+    width: 20vw
+  }
 }
