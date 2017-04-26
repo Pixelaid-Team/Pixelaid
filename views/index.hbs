@@ -7,24 +7,56 @@
     <link rel="stylesheet" href="./stylesheets/style.css">
   </head>
   <body>
-    <div class="logo-container">
-      <img src="./media/pixelaid-logo.svg" alt="">
+    <div class="parallax">
+      <div class="logo-container">
+        <img src="./media/pixelaid-logo.svg" alt="">
+      </div>
+
+      <div class="sign-in">
+        <form class="sign-in-form" action="/login" method="post">
+          <input type="text" name="username" placeholder="Username">
+          <input type="text" name="password" placeholder="Password">
+          <input type="submit" class="signin-button" value="Log In">
+        </form>
+        <p id="signin-error">{{error}}</p>
+      </div>
+      <div class="home-buttons">
+        <a href="/signup"><button type="button">Sign Up</button></a>
+        <!-- <a href="/canvas"><button type="button">CANVAS</button></a>
+        <a href="/questions"><button type="button">QUESTIONS</button></a> -->
+      </div>
     </div>
 
-    <div class="sign-in">
-      <form class="sign-in-form" action="/login" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="password" placeholder="Password">
-        <input type="submit" name="" value="Log In">
-      </form>
-      <p>{{error}}</p>
-    </div>
-    <div class="">
+    <div class="info-container">
+      <div class="slogan">
+        <h2>Gamifying the way recognize and help one another</h2>
+      </div>
+      <div class="workplace-stats">
+        <h2>Why is workplace recognition and collaboration so important?</h2>
+        <div class="graph-stats">
+          <img src="./media/bar-chart.svg" alt="">
+          <div class="stats">
+            <p>41% of companies that use peer-to-peer recognition have seen marked positive increases in customer satisfaction.</p>
+            <p>Companies with strategic recognition reported a mean employee turnover rate that is 23.4% lower than retention at companies without any recognition program.</p>
+            <p>Peer-to-peer is 35.7% more likely to have a positive impact on financial results than manager-only recognition.</p>
+            <p>(SHRM/Globoforce Employee Recognition Survey, 2012)</p>
+          </div>
+        </div>
 
+        <div class="gamification">
+          <h2>Recognition, Reward, Competition</h2>
+          <div class="game-stats">
+            <p>Gamification works because it taps into each of these motivators to keep employees engaged.</p>
+            <p>Our software uses Gamification of workplace recognition to:</p>
+            <p>1.Give Team member incentive to help one another– by facilitating it, and breaking each task into bite-size chunks</p>
+            <p>2.Give team member the ability to recognize one  another and collaborate on team project</p>
+            <p>3. Give the user a trigger or cue to complete the action, cash in points by helping create a team Pixel Board</p>
+          </div>
+          <div class="rplace-image">
+            <img src="https://i.redd.it/wc436nf7fdpy.png" alt="">
+          </div>
+        </div>
+      </div>
     </div>
-
-    <a href="/signup"><button type="button">Sign Up</button></a>
-    <a href="/canvas">CANVAS</a>
-    <a href="/questions">QUESTIONS</a>
   </body>
 </html>
