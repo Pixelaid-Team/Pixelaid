@@ -29,7 +29,7 @@ function getCanvas(){
 function updateCanvas(obj){
   let temp = obj['json']
   let newObj = JSON.parse(temp)
-  console.log(newObj);
+  //console.log(newObj);
   return pg('section').where('id', newObj['id']).update({
     'row_0': newObj[0],
     'row_1': newObj[1],
@@ -49,6 +49,19 @@ function updateCanvas(obj){
     'row_15': newObj[15]
   })
 }
+
+
+//subtract pixels from user total
+function subtractPixels (data, id, pixel) {
+  console.log(data["json"]);
+  console.log(pixel);
+  var count = pixel - +data["json"]
+  console.log(data);
+  console.log(pixel);
+  return pg('users').where('id', id).update({'pixel_count': count})
+}
+
+
 
 function addAnswer(obj, id){
   return pg('answer').insert({
@@ -93,5 +106,6 @@ module.exports={
   endorse,
   getKudos,
   giveKudo,
-  addPixel
+  addPixel,
+  subtractPixels
 }

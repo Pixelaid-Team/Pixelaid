@@ -25,8 +25,8 @@ h2{
   flex-wrap:wrap;
   min-width: 384px;
   max-width: 384px;
-  min-height: 128px;
-  max-height: 128px;
+  min-height: 384px;
+  max-height: 384px;
   box-sizing: content-box;
 }
 

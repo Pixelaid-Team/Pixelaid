@@ -1,13 +1,14 @@
 var sectionSize = 128,
-  sectionRows = 1,
+  sectionRows = 3,
   sectionCols = 3,
   modalUp = false,
+  userPixels = 0,
   pixelsUsed = 0,
   sectionArr = [],
   sectionId = "",
-  selectedColor = "rgb(255, 255, 255)"
+  selectedColor = "rgb(255, 255, 255)";
 
-const colors = ["G","Y","R","B","V","O","W","E","L"]
+var colors = ["G","Y","R","B","V","O","W","E","L"]
 var modal = document.getElementById('myModal')
 var modalCanvas = $('#modalCanvas')
 var palette = $('#palette')
@@ -20,6 +21,7 @@ $(document).ready(function(){
 
     var fullPic = unpack(data)
     console.log(data);
+    console.log("?");
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
@@ -28,14 +30,17 @@ $(document).ready(function(){
       if(secDiv.classList.contains('section')){
         modalUp = true
         sectionId = getId(secDiv.id)
+        console.log(sectionId);
         //console.log(modal.style.display);
         sectionArr = fullPic[secDiv.id]
         //let temp = sectionArr.slice()
         //FIX cancel and erase the sectionArr here!
         //console.log(sectionArr);
         modal.style.display = "flex"
+
         drawSection(fullPic, secDiv.id)
         selectColor(selectedColor)
+
       }
     })
 
@@ -56,6 +61,7 @@ $(document).ready(function(){
       let newData = pack(sectionArr, sectionId)
       console.log(newData);
       PostObjectToUrl("/updateCanvas", newData)
+      subtractPixels("/subtractPixels", pixelsUsed)
 
     })
 
@@ -73,6 +79,8 @@ $(document).ready(function(){
         let xx = event.target.getAttribute('x')
         sectionArr[yy][xx] = getChar(selectedColor)
         event.target.style.backgroundColor = selectedColor
+        pixelsUsed += 1
+        $('#spendPixels').text(pixelsUsed)
         //console.log(selectedColor);
         //console.log(sectionArr);
         //console.log(fullPic);
@@ -112,6 +120,12 @@ function drawCanvas(arr){
 //create single selected section with color palette
 function drawSection(obj, pos){
   $('#modalPos').text(pos)
+  $('#spendPixels').text(pixelsUsed)
+
+  let tempPixel = $('#userPixels').text()
+  userPixel = +tempPixel
+
+
   let arr = obj[pos]
   for (let i = 2; i < arr.length; i++) {
     for (let n = 0; n < arr[i].length; n++) {
@@ -187,7 +201,13 @@ function getId(pos){
       stringB = pos.substring(i+1,pos.length)
     }
   }
-  return (+stringA +1)*(+stringB) +1
+  if(stringA === "0"){
+    return +stringB +1
+  } else if(stringA === "1"){
+    return +stringB + 4
+  } else if(stringA === "2"){
+    return +stringB + 7
+  }
 }
 
 //post the current selectedArr to the database
@@ -205,6 +225,22 @@ function PostObjectToUrl(url, obj){
       form.appendChild(input);
       document.body.appendChild(form);
       form.submit();
+}
+
+function subtractPixels(url, val){
+
+        var form, input;
+        //json = JSON.stringify(obj);
+
+        form = document.createElement("form");
+        form.method = "post";
+        form.action = url;
+        input = document.createElement("input");
+        input.setAttribute("name", "json");
+        input.setAttribute("value", val);
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
 }
 
 //return color from character
