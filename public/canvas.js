@@ -1,4 +1,4 @@
-var sectionSize = 64,
+var sectionSize = 128,
   sectionRows = 1,
   sectionCols = 3,
   modalUp = false,

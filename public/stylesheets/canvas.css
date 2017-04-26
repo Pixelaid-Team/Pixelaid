@@ -23,10 +23,10 @@ h2{
   border:1px solid black;
   display:flex;
   flex-wrap:wrap;
-  min-width: 192px;
-  max-width: 192px;
-  min-height: 64px;
-  max-height: 64px;
+  min-width: 384px;
+  max-width: 384px;
+  min-height: 128px;
+  max-height: 128px;
   box-sizing: content-box;
 }
 
