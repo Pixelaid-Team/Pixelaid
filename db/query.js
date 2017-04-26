@@ -26,12 +26,23 @@ function getCanvas(){
   return pg('section')
 }
 
-function addAnswer(obj){
-  return pg('answer').insert(obj)
+function addAnswer(obj, id){
+  return pg('answer').insert({
+    body: obj.body,
+    question_id: obj.question_id,
+    votes: obj.votes,
+    user_id: id
+  })
+}
+
+function addPixel(obj) {
+  var currentPixels = +obj['pixel_count'] + 11
+  console.log(currentPixels + 4);
+  return pg('users').where('id', obj['id']).update('pixel_count', currentPixels)
 }
 
 function endorse(obj){
-  return pg('answer').where('id', obj['answer_id']).update('votes', +obj['votes' ]+1)
+  return pg('answer').where('id', obj['answer_id']).update('votes', +obj['votes'] + 1)
 }
 
 function getKudos(id){
@@ -56,6 +67,6 @@ module.exports={
   getCanvas,
   endorse,
   getKudos,
-  giveKudo
-
+  giveKudo,
+  addPixel
 }
