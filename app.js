@@ -66,6 +66,12 @@ app.post('/login',
   })
 );
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect('/')
+  })
+})
+
 app.get('/signup', (req, res) => {
   res.render('signup')
 })
