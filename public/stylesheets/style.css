@@ -15,6 +15,10 @@ a {
 
 .parallax {
   height: 100vh;
+  background-image: url('../media/mobile-background2.png');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 
 .logo-container {
@@ -24,7 +28,7 @@ a {
 }
 
 .logo-container img {
-  width: 50%;
+  width: 77%;
 }
 
 .sign-in {
@@ -41,7 +45,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 70%;
   height: 100%;
 }
 
@@ -50,8 +54,8 @@ a {
 }
 
 .sign-in-form input {
-  width: 70%;
-  font-size: 1.5em;
+  width: 80%;
+  font-size: 1.75em;
   font-family: 'Nova Square', sans-serif;
   margin: 11px 0;
 }
@@ -174,4 +178,32 @@ a {
   display: flex;
   flex-direction: column;
   width: 37%;
+}
+
+@media(min-width: 800) {
+  .parallax {
+    background-image: url('../media/tablet-background.png');
+  }
+}
+
+@media (min-width: 1000px) {
+  .parallax {
+    background-image: url('../media/desktop-background.png');
+  }
+
+  .logo-container img {
+    width: 50%;
+  }
+
+  .sign-in form {
+    width: 30%;
+    height: 100%;
+  }
+
+  .sign-in-form input {
+    width: 70%;
+    font-size: 1.5em;
+    font-family: 'Nova Square', sans-serif;
+    margin: 11px 0;
+  }
 }
