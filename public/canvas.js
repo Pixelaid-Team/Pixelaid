@@ -2,6 +2,7 @@ var sectionSize = 128,
   sectionRows = 1,
   sectionCols = 3,
   modalUp = false,
+  pixelsUsed = 0,
   sectionArr = [],
   sectionId = "",
   selectedColor = "rgb(255, 255, 255)"
