@@ -107,7 +107,7 @@ app.post('/signup', (req, res) => {
 var currentUser = 'hey'
 
 app.get('/canvas', (req, res) => {
-  console.log(req.user);
+  //console.log(req.user);
   currentUser = req.user
   query.getCanvas()
   .then(data => {

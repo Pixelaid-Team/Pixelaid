@@ -1,5 +1,5 @@
 var sectionSize = 128,
-  sectionRows = 1,
+  sectionRows = 3,
   sectionCols = 3,
   modalUp = false,
   pixelsUsed = 0,
@@ -28,6 +28,7 @@ $(document).ready(function(){
       if(secDiv.classList.contains('section')){
         modalUp = true
         sectionId = getId(secDiv.id)
+        console.log(sectionId);
         //console.log(modal.style.display);
         sectionArr = fullPic[secDiv.id]
         //let temp = sectionArr.slice()
@@ -187,7 +188,13 @@ function getId(pos){
       stringB = pos.substring(i+1,pos.length)
     }
   }
-  return (+stringA +1)*(+stringB) +1
+  if(stringA === "0"){
+    return +stringB +1
+  } else if(stringA === "1"){
+    return +stringB + 4
+  } else if(stringA === "2"){
+    return +stringB + 7
+  }
 }
 
 //post the current selectedArr to the database

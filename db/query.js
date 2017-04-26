@@ -29,7 +29,7 @@ function getCanvas(){
 function updateCanvas(obj){
   let temp = obj['json']
   let newObj = JSON.parse(temp)
-  console.log(newObj);
+  //console.log(newObj);
   return pg('section').where('id', newObj['id']).update({
     'row_0': newObj[0],
     'row_1': newObj[1],
