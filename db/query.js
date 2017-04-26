@@ -37,8 +37,8 @@ function addAnswer(obj, id){
 
 function addPixel(obj) {
   var currentPixels = +obj['pixel_count'] + 11
-  console.log(currentPixels + 4);
-  return pg('users').where('id', obj['id']).update('pixel_count', currentPixels)
+  console.log(currentPixels);
+  return pg('users').where('id', obj['id']).update({'pixel_count': currentPixels})
 }
 
 function endorse(obj){

@@ -148,18 +148,21 @@ app.get("/answer/:id", (req, res)=>{
   })
 })
 
+app.get('/answerpixel/:id', (req, res) => {
+  let answerId = req.params.id
+  query.addPixel(req.user)
+  .then(data => {
+    res.redirect('/answer/' + answerId)
+  })
+})
 
 app.post("/addAnswer/:id", (req, res)=>{
   req.body.question_id = req.params.id
   let answerId = req.params.id
   req.body['votes'] = 0
   query.addAnswer(req.body, req.user.id)
-  .then(data => {
-    query.addPixel(req.user)
-    console.log(req.user);
-  })
   .then(data =>{
-    res.redirect("/answer/" + answerId)
+    res.redirect("/answerpixel/" + answerId)
   })
 })
 
