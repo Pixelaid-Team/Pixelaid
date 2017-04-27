@@ -162,12 +162,14 @@ app.get("/delete/:id", (req, res)=> {
   })
 })
 
+var answerUser = 'hey'
 
 app.get("/answer/:id", (req, res)=>{
- query.getAnswer(req.params.id)
+  answerUser = req.user
+  query.getAnswer(req.params.id)
   .then(data =>{
     //console.log(data);
-    res.render("answer", {data, title: data[0].title, body: data[0].body})
+    res.render("answer", {data, answerUser})
   })
 })
 

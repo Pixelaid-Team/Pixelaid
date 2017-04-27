@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-.logo-container img {
+.logo-container img, .logo-container a {
   width: 77%;
 }
 
@@ -61,7 +61,7 @@
     background-image: url('../media/desktop-background.png');
   }
 
-  .logo-container img {
+  .logo-container img, .logo-container a {
     width: 50%;
   }
 }
