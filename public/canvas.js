@@ -74,16 +74,19 @@ $(document).ready(function(){
     //change color of section pixels and update the selected Array
     $('#modalCanvas').click(function(event){
       if(event.target.classList.contains('editPixel')){
-        console.log(event.target);
-        let yy = event.target.getAttribute('y')
-        let xx = event.target.getAttribute('x')
-        sectionArr[yy][xx] = getChar(selectedColor)
-        event.target.style.backgroundColor = selectedColor
-        pixelsUsed += 1
-        $('#spendPixels').text(pixelsUsed)
-        //console.log(selectedColor);
-        //console.log(sectionArr);
-        //console.log(fullPic);
+        if(userPixel > 0 && pixelsUsed < userPixel){
+          let yy = event.target.getAttribute('y')
+          let xx = event.target.getAttribute('x')
+          if(event.target.style.backgroundColor != selectedColor){
+            sectionArr[yy][xx] = getChar(selectedColor)
+            event.target.style.backgroundColor = selectedColor
+            pixelsUsed += 1
+            $('#spendPixels').text(pixelsUsed)
+            console.log(userPixel +" - "+ pixelsUsed);
+          }
+        } else {
+          //add warning message
+        }
       }
     })
   })
