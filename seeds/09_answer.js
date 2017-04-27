@@ -10,14 +10,16 @@ exports.seed = function(knex, Promise) {
         question_id: 1,
         user_id: 1,
         votes: 5,
-        created_at: "Today"
+        created_at: "Today",
+        answer_username: "devin-hanaway"
         },
         {
         body: "answer number 2",
         question_id: 2,
         user_id: 3,
         votes: 5,
-        created_at: "Today"
+        created_at: "Today",
+        answer_username: "devinDaDude"
 
         },
         {
@@ -25,7 +27,8 @@ exports.seed = function(knex, Promise) {
         question_id: 3,
         user_id: 2,
         votes: 5,
-        created_at: "Today"
+        created_at: "Today",
+        answer_username: "Taylor"
         }
       ]);
     });
