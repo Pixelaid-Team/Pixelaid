@@ -325,11 +325,14 @@ function getColor(char){
       break;
   }
 }
-//get character from color
+//return color from character
 function getChar(color){
   switch(color){
-    case "rgb(37, 156, 35)":
+    case "rgb(74, 214, 72)":
       return "G"
+      break;
+    case "rgb(14, 113, 51)":
+      return "A"
       break;
     case "rgb(240, 238, 77)":
       return "Y"
@@ -337,20 +340,38 @@ function getChar(color){
     case "rgb(244, 38, 24)":
       return "R"
       break;
+    case "rgb(245, 105, 172)":
+      return "P"
+      break;
+    case "rgb(255, 224, 189)":
+      return "T"
+      break;
     case "rgb(55, 171, 228)":
       return "B"
+      break;
+    case "rgb(20, 39, 204)":
+      return "D"
       break;
     case "rgb(131, 1, 201)":
       return "V"
       break;
+    case "rgb(145, 20, 84)":
+      return "M"
+      break;
     case "rgb(242, 146, 33)":
       return "O"
+      break;
+    case "rgb(33, 242, 205)":
+      return "S"
       break;
     case "rgb(255, 255, 255)":
       return "W"
       break;
-    case "rgb(152, 152, 152)":
+    case "rgb(196, 196, 196)":
       return "E"
+      break;
+    case "rgb(48, 48, 48)":
+      return "H"
       break;
     case "rgb(0, 0, 0)":
       return "L"
