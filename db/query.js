@@ -4,10 +4,6 @@ function getAll(){
   return pg('question')
 }
 
-function findUserIfExists(obj) {
-  return pg('users').select()
-}
-
 function add(obj){
   return pg('question').insert(obj)
 }
@@ -107,7 +103,6 @@ function getKudos(id){
 
 module.exports={
   getAll,
-  findUserIfExists,
   add,
   deleteQuestion,
   getAnswers,

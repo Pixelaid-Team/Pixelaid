@@ -7,13 +7,21 @@
 }
 
 .logo-container {
-  width: 100%;
+  width: 100vw;
+  /*height: 100%;*/
   display: flex;
   justify-content: center;
+  margin-bottom: 37px;
 }
 
-.logo-container img, .logo-container a {
-  width: 77%;
+.logo-container a {
+  width: 80%;
+  height: 100%;
+}
+
+.logo-container img {
+  width: 100%;
+  /*height: 100%;*/
 }
 
 .signup-form {
@@ -50,6 +58,15 @@
   padding: 7px 0;
 }
 
+#signup-error {
+  color: white;
+  background-color: red;
+  font-family: 'VT323', sans-serif;
+  font-size: 2.7em;
+  padding: 7px;
+  margin-top: 11px;
+}
+
 @media(min-width: 800) {
   .parallax {
     background-image: url('../media/tablet-background.png');
@@ -61,7 +78,18 @@
     background-image: url('../media/desktop-background.png');
   }
 
-  .logo-container img, .logo-container a {
+  .logo-container {
+    margin-bottom: 0;
+  }
+
+  .logo-container a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo-container img {
     width: 50%;
   }
 }
