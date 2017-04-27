@@ -68,12 +68,12 @@ function subtractPixels (data, id, pixel) {
 
 
 
-function addAnswer(obj, id){
+function addAnswer(obj, user){
   return pg('answer').insert({
     body: obj.body,
     question_id: obj.question_id,
     votes: obj.votes,
-    user_id: id
+    user_id: user.id
   })
 }
 
