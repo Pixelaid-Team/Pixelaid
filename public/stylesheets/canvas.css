@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 main {
   display:flex;
   flex-direction:column;
@@ -6,28 +11,43 @@ main {
 
 header {
   width: 100%;
-  height: 5em;
+  /*height: 5em;*/
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 17px;
+  background-color: rgb(208, 227, 237);
+  margin-bottom: 27px;
+  border-bottom: 4px solid black;
+  box-sizing: border-box;
 }
 
 .header-logo {
-  width: 30%;
+  width: 100%;
   /*height: 100%;*/
   display: flex;
   align-items: center;
+  margin-bottom: 27px;
 }
 
 .header-logo img {
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
+}
+
+.header-logo a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-buttons {
-  width: 50%;
+  width: 100%;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+  margin-bottom: 27px;
 }
 
 .nav-buttons button {
@@ -37,6 +57,8 @@ header {
   font-size: 1.5em;
   font-family: 'VT323', sans-serif;
   margin: 0 11px;
+  padding: 7px;
+  cursor: pointer;
 }
 
 .section {
@@ -82,8 +104,10 @@ header {
   z-index: 1;
   width:450px;
   height:450px;
+  padding: 17px;
+  margin-top: -27px;
   /*opacity: .5;*/
-  background-color: rgb(152, 152, 152);
+  background-color: rgb(208, 227, 237);
 
   flex-direction: column;
   justify-content: space-around;
@@ -91,9 +115,12 @@ header {
 }
 
 .modalHeader, .modalFooter {
-  width: 80%;
+  width: 90%;
+  /*padding-left: 37px;*/
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
+  font-family: 'Nova Square', sans-serif;
+  text-align: center;
 }
 
 .modalMain {
@@ -102,6 +129,7 @@ header {
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
+  font-family: 'Nova Square', sans-serif;
 }
 
 #modalCanvas {
@@ -125,7 +153,7 @@ header {
 }
 
 #palette {
-  border:1px solid black;
+  /*border:1px solid black;*/
   width:32px;
   height:288px;
   display:flex;
@@ -133,7 +161,7 @@ header {
 }
 
 #colorDiv {
-  border:1px solid black;
+  /*border:1px solid black;*/
   width:32px;
   height:32px;
 }
@@ -159,6 +187,62 @@ header {
 }
 
 .modalBtn {
-  width:75px;
-  height:30px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-size: 1.5em;
+  font-family: 'VT323', sans-serif;
+  margin: 0 11px;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+@media (min-width: 800) {
+
+}
+
+@media (min-width: 1100px) {
+  header {
+    width: 100%;
+    height: 5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    width: 30%;
+    /*height: 100%;*/
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  /*.header-logo img {
+    width: 70%;
+    height: 70%;
+  }*/
+
+  .header-logo a {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .nav-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  /*.nav-buttons button {
+    border: none;
+    background-color: red;
+    color: white;
+    font-size: 1.5em;
+    font-family: 'VT323', sans-serif;
+    margin: 0 11px;
+  }*/
 }
