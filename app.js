@@ -79,7 +79,7 @@ app.get('/signup', (req, res) => {
 const saltRounds = 10
 
 app.get('/signuperror', (req, res) => {
-  res.render('signup', {error: "Username already exists"})
+  res.render('signup', {error: "USERNAME/EMAIL ALREADY EXISTS"})
 })
 
 app.post('/signup', (req, res) => {
