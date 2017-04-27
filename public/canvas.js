@@ -9,7 +9,7 @@ var sectionSize = 128,
   sectionPos = "",
   selectedColor = "rgb(255, 255, 255)";
 
-var colors = ["G","Y","R","B","V","O","W","E","L"]
+var colors = ["G", "A", "Y", "R", "P", "T", "B", "D", "V", "M", "O", "S", "W", "E", "H", "L"]
 var modal = document.getElementById('myModal')
 var modalCanvas = $('#modalCanvas')
 var palette = $('#palette')
@@ -31,12 +31,12 @@ $(document).ready(function(){
         modalUp = true
         sectionPos = secDiv.id
         sectionId = getId(sectionPos)
-        console.log(sectionId);
-        sectionArr = fullPic[secDiv.id]
-        //sectionArr = copyArr(fullPic[secDiv.id])
+        console.log(fullPic[secDiv.id]);
+        //sectionArr = fullPic[secDiv.id]
+        sectionArr = copyArr(fullPic[secDiv.id])
         //FIX cancel and erase the sectionArr here!
         modal.style.display = "flex"
-        drawSection(fullPic, secDiv.id)
+        drawSection(sectionArr, sectionId)
         selectColor(selectedColor)
 
       }
@@ -63,7 +63,6 @@ $(document).ready(function(){
             event.target.style.backgroundColor = selectedColor
             pixelsUsed += 1
             $('#spendPixels').text(pixelsUsed)
-            console.log(userPixel +" - "+ pixelsUsed);
           }
         } else {
           //add warning message
@@ -96,11 +95,11 @@ $(document).ready(function(){
 
     //clear the edits, array, and pixels used in the section
     $('#modalClear').click(function(){
-      console.log(sectionArr);
-      console.log(fullPic[sectionPos]);
-
+      sectionArr = copyArr(fullPic[sectionPos])
+      drawSection(sectionArr, sectionPos)
+      pixelsUsed = 0
+      $('#spendPixels').text(pixelsUsed)
     })
-
   })
 })
 
@@ -133,7 +132,7 @@ function drawCanvas(arr){
 }
 
 //create single selected section with color palette
-function drawSection(obj, pos){
+function drawSection(arr, pos){
   $('#modalPos').text(pos)
   $('#spendPixels').text(pixelsUsed)
   modalCanvas.empty()
@@ -142,7 +141,7 @@ function drawSection(obj, pos){
   userPixel = +tempPixel
 
 
-  let arr = obj[pos]
+  //let arr = obj[pos]
   for (let i = 2; i < arr.length; i++) {
     for (let n = 0; n < arr[i].length; n++) {
       let tempDiv = document.createElement('div')
@@ -230,6 +229,14 @@ function getId(pos){
 function copyArr(arr){
   let newArr = []
   console.log(arr);
+  for (let i = 0; i < arr.length; i++) {
+    newArr[i] = []
+    for (let n = 0; n < arr[i].length; n++) {
+      newArr[i][n] = arr[i][n]
+    }
+  }
+  //console.log(newArr);
+  return newArr
 }
 
 //post the current selectedArr to the database
@@ -269,7 +276,10 @@ function subtractPixels(url, val){
 function getColor(char){
   switch(char){
     case "G":
-      return "rgb(37, 156, 35)"
+      return "rgb(74, 214, 72)"
+      break;
+    case "A":
+      return "rgb(14, 113, 51)"
       break;
     case "Y":
       return "rgb(240, 238, 77)"
@@ -277,20 +287,38 @@ function getColor(char){
     case "R":
       return "rgb(244, 38, 24)"
       break;
+    case "P":
+      return "rgb(245, 105, 172)"
+      break;
+    case "T":
+      return "rgb(255, 224, 189)"
+      break;
     case "B":
       return "rgb(55, 171, 228)"
+      break;
+    case "D":
+      return "rgb(20, 39, 204)"
       break;
     case "V":
       return "rgb(131, 1, 201)"
       break;
+    case "M":
+      return "rgb(145, 20, 84)"
+      break;
     case "O":
       return "rgb(242, 146, 33)"
+      break;
+    case "S":
+      return "rgb(33, 242, 205)"
       break;
     case "W":
       return "rgb(255, 255, 255)"
       break;
     case "E":
-      return "rgb(152, 152, 152)"
+      return "rgb(196, 196, 196)"
+      break;
+    case "H":
+      return "rgb(48, 48, 48)"
       break;
     case "L":
       return "rgb(0, 0, 0)"

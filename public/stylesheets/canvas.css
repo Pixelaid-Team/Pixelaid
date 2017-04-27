@@ -126,8 +126,8 @@ header {
 
 #palette {
   border:1px solid black;
-  width:32px;
-  height:288px;
+  width:64px;
+  height:256px;
   display:flex;
   flex-wrap:wrap;
 }
