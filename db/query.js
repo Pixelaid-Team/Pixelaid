@@ -82,15 +82,17 @@ function endorse(obj){
   return pg('answer').where('id', obj['answer_id']).update('votes', +obj['votes'] + 1)
 }
 
-function getKudos(id){
-  return pg('kudo')
-  .fullOuterJoin('kudo', 'kudo.from_user_id', 'answer.question_id')
-  .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id)
-}
 
-function giveKudo(obj){
-  return pg('kudo').insert(obj)
-}
+
+// function getKudos(id){
+//   return pg('kudo')
+//   .fullOuterJoin('kudo', 'kudo.from_user_id', 'answer.user_id')
+//   .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id)
+// }
+
+// function giveKudo(obj){
+//   return pg('kudo').insert(obj)
+// }
 
 
 
@@ -104,8 +106,8 @@ module.exports={
   getCanvas,
   updateCanvas,
   endorse,
-  getKudos,
-  giveKudo,
+  // getKudos,
+  //giveKudo,
   addPixel,
   subtractPixels
 }
