@@ -15,10 +15,10 @@ function add(obj){
 function deleteQuestion(id){
   return pg('question').where('id', id).del()}
 
-function getAnswer(id){
+function getAnswers(id){
   return pg('answer')
   .fullOuterJoin('question', 'question.id', 'answer.question_id')
-  .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id).orderBy('votes', 'desc')
+  .select('*', "answer.body as answer_body", "answer.id as answer_id", "answer.answer_username as answer_username").where('question.id', '=', id).orderBy('votes', 'desc')
 }
 
 //get the canvas and tables.
@@ -73,7 +73,8 @@ function addAnswer(obj, user){
     body: obj.body,
     question_id: obj.question_id,
     votes: obj.votes,
-    user_id: user.id
+    user_id: user.id,
+    answer_username: user.name
   })
 }
 
@@ -113,7 +114,7 @@ module.exports={
   findUserIfExists,
   add,
   deleteQuestion,
-  getAnswer,
+  getAnswers,
   addAnswer,
   getCanvas,
   updateCanvas,
