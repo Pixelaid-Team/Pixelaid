@@ -1,25 +1,61 @@
-main{
+main {
   display:flex;
   flex-direction:column;
   align-items:center;
 }
-h2{
-  margin:10px;
+
+header {
+  width: 100%;
+  height: 5em;
+  display: flex;
+  justify-content: space-between;
 }
-.section{
+
+.header-logo {
+  width: 30%;
+  /*height: 100%;*/
+  display: flex;
+  align-items: center;
+}
+
+.header-logo img {
+  width: 50%;
+  height: 50%;
+}
+
+.nav-buttons {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-buttons button {
+  border: none;
+  background-color: red;
+  color: white;
+  font-size: 1.5em;
+  font-family: 'VT323', sans-serif;
+  margin: 0 11px;
+}
+
+.section {
   display:flex;
   flex-wrap:wrap;
   box-sizing: content-box;
   color:transparent;
 }
-.section:hover{
+
+.section:hover {
   opacity: .5;
   color:black;
 }
-.posP{
+
+.posP {
   position: absolute;
 }
-#canvasFrame{
+
+#canvasFrame {
   border:1px solid black;
   display:flex;
   flex-wrap:wrap;
@@ -30,8 +66,17 @@ h2{
   box-sizing: content-box;
 }
 
+.canvas-page-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 
-.modal{
+.user-canvas-info {
+  font-family: 'Nova Square', sans-serif;
+}
+
+.modal {
   display:none;
   position:fixed;
   z-index: 1;
@@ -44,19 +89,22 @@ h2{
   justify-content: space-around;
   align-items: center;
 }
-.modalHeader, .modalFooter{
+
+.modalHeader, .modalFooter {
   width: 80%;
   display: flex;
   justify-content:space-between;
 }
-.modalMain{
+
+.modalMain {
   width:100%;
   display:flex;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
 }
-#modalCanvas{
+
+#modalCanvas {
   border:1px solid black;
   min-width:320px;
   max-width:320px;
@@ -65,27 +113,32 @@ h2{
   display:flex;
   flex-wrap:wrap;
 }
-.editPixel{
+
+.editPixel {
   width:20px;
   height:20px;
 }
-.editPixel:hover{
+
+.editPixel:hover {
   opacity: .5;
   color:black;
 }
-#palette{
+
+#palette {
   border:1px solid black;
   width:32px;
   height:288px;
   display:flex;
   flex-wrap:wrap;
 }
-#colorDiv{
+
+#colorDiv {
   border:1px solid black;
   width:32px;
   height:32px;
 }
-.colorpick{
+
+.colorpick {
   width: 45px;
   height:150px;
   display:flex;
@@ -94,15 +147,18 @@ h2{
   justify-content: center;
   align-items: center;
 }
-.color{
+
+.color {
   width:32px;
   height:32px;
 }
-.color:hover{
+
+.color:hover {
   opacity: .5;
   color:black;
 }
-.modalBtn{
+
+.modalBtn {
   width:75px;
   height:30px;
 }

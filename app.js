@@ -126,18 +126,22 @@ app.get('/data', (req, res)=>{
 app.post('/updateCanvas', (req, res) =>{
   query.updateCanvas(req.body)
   .then(() => {
-    res.redirect('canvas')
+    //res.redirect('canvas')
+    query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+    .then(() =>{
+      res.redirect('/canvas')
+    })
   })
 })
 
 
 //subtract from the user's pixel count
-app.post('/subtractPixels', (req, res) => {
-  query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
-  .then(() => {
-    res.redirect('canvas')
-  })
-})
+// app.post('/subtractPixels', (req, res) => {
+//   query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+//   .then(() => {
+//     res.redirect('/updateCanvas')
+//   })
+// })
 
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
@@ -162,6 +166,7 @@ app.get("/delete/:id", (req, res)=> {
   })
 })
 
+var answerUser = 'hey'
 
 app.get("/answer/:id", (req, res)=>{
   let user = req.user
@@ -170,7 +175,7 @@ app.get("/answer/:id", (req, res)=>{
     data[0].user = user.name
     console.log(data)
     res.render("answer", {data, title: data[0].title, body: data[0].body})
-  })
+})
 })
 
 app.get('/answerpixel/:id', (req, res) => {
@@ -246,4 +251,4 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, console.log('listening on ' + port))
 
-module.exports = app;
+module.exports = app

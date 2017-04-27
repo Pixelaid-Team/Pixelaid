@@ -6,6 +6,7 @@ var sectionSize = 128,
   pixelsUsed = 0,
   sectionArr = [],
   sectionId = "",
+  sectionPos = "",
   selectedColor = "rgb(255, 255, 255)";
 
 var colors = ["G","Y","R","B","V","O","W","E","L"]
@@ -20,8 +21,7 @@ $(document).ready(function(){
   $.get('/data').then(function(data){
 
     var fullPic = unpack(data)
-    console.log(data);
-    console.log("?");
+    //console.log(data);
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
@@ -29,18 +29,48 @@ $(document).ready(function(){
       let secDiv = event.target.parentElement
       if(secDiv.classList.contains('section')){
         modalUp = true
-        sectionId = getId(secDiv.id)
-        console.log(sectionId);
+        sectionPos = secDiv.id
+        sectionId = getId(sectionPos)
+        //console.log(sectionId);
         //console.log(modal.style.display);
         sectionArr = fullPic[secDiv.id]
         //let temp = sectionArr.slice()
         //FIX cancel and erase the sectionArr here!
         //console.log(sectionArr);
         modal.style.display = "flex"
-
+        //console.log(secDiv.id);
         drawSection(fullPic, secDiv.id)
         selectColor(selectedColor)
 
+      }
+    })
+
+
+
+    //change selected color
+    $('#palette').click(function(event){
+      selectedColor = event.target.style.backgroundColor
+      selectColor(event.target.style.backgroundColor)
+    })
+
+    //change color of section pixels and update the selected Array
+    $('#modalCanvas').click(function(event){
+      if(event.target.classList.contains('editPixel')){
+        //make sure user has enough pixels
+        if(userPixel > 0 && pixelsUsed < userPixel){
+          let yy = event.target.getAttribute('y')
+          let xx = event.target.getAttribute('x')
+          //forgive a misclick of same color
+          if(event.target.style.backgroundColor != selectedColor){
+            sectionArr[yy][xx] = getChar(selectedColor)
+            event.target.style.backgroundColor = selectedColor
+            pixelsUsed += 1
+            $('#spendPixels').text(pixelsUsed)
+            console.log(userPixel +" - "+ pixelsUsed);
+          }
+        } else {
+          //add warning message
+        }
       }
     })
 
@@ -52,40 +82,28 @@ $(document).ready(function(){
       palette.empty()
       selectedColor = "rgb(255, 255, 255)"
       //FIX cancel and erase the sectionArr here!
-      sectionArr = []
-      sectionId = ""
+      //sectionArr = []
+      //sectionId = ""
     })
 
     //submit edited section to the DB canvas
     $("#modalSubmit").click(function(){
       let newData = pack(sectionArr, sectionId)
       console.log(newData);
-      PostObjectToUrl("/updateCanvas", newData)
-      subtractPixels("/subtractPixels", pixelsUsed)
+      PostObjectToUrl("/updateCanvas", {section: newData, pixels: pixelsUsed})
+      //subtractPixels("/subtractPixels", pixelsUsed)
+
+
 
     })
 
-    //change selected color
-    $('#palette').click(function(event){
-      selectedColor = event.target.style.backgroundColor
-      selectColor(event.target.style.backgroundColor)
+    //clear the edits, array, and pixels used in the section
+    $('#modalClear').click(function(){
+      console.log(sectionArr);
+      console.log(fullPic[sectionPos]);
+
     })
 
-    //change color of section pixels and update the selected Array
-    $('#modalCanvas').click(function(event){
-      if(event.target.classList.contains('editPixel')){
-        console.log(event.target);
-        let yy = event.target.getAttribute('y')
-        let xx = event.target.getAttribute('x')
-        sectionArr[yy][xx] = getChar(selectedColor)
-        event.target.style.backgroundColor = selectedColor
-        pixelsUsed += 1
-        $('#spendPixels').text(pixelsUsed)
-        //console.log(selectedColor);
-        //console.log(sectionArr);
-        //console.log(fullPic);
-      }
-    })
   })
 })
 
@@ -209,6 +227,8 @@ function getId(pos){
     return +stringB + 7
   }
 }
+
+
 
 //post the current selectedArr to the database
 function PostObjectToUrl(url, obj){

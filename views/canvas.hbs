@@ -2,39 +2,56 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="./stylesheets/canvas.css"/>
     <title>g46 canvas</title>
   </head>
   <body>
     <main>
-      <h1>Hello World</h1>
-      <div id="canvasFrame"></div>
-      <div id="myModal" class="modal">
-        <div class="modalHeader">
-          <h2 id="modalPos">0,0</h2>
-          <h2>User: {{currentUser.name}}</h2>
-          <div>
-            <h2>Pixels: <span id="userPixels">{{currentUser.pixel_count}}</span></h2>
-            <h2>Pixels: <span id="spendPixels"></span></h2>
+      <header>
+        <div class="header-logo">
+          <a href="/"><img src="../media/pixelaid-logo.svg" alt=""></a>
+        </div>
+        <div class="nav-buttons">
+          <a href="/questions"><button type="button">QUESTIONS</button></a>
+          <a href="/kudos"><button type="button">KUDOS</button></a>
+          <a href="#"><button type="button">LOGOUT?</button></a>
+        </div>
+      </header>
+
+      <div class="canvas-page-content">
+        <div id="canvasFrame"></div>
+        <div id="myModal" class="modal">
+          <div class="modalHeader">
+            <h2 id="modalPos">0,0</h2>
+            <h2>User: {{currentUser.name}}</h2>
+            <div>
+              <h2>Pixels: <span id="userPixels">{{currentUser.pixel_count}}</span></h2>
+              <h2>Pixels: <span id="spendPixels"></span></h2>
+            </div>
+          </div>
+          <div class="modalMain">
+            <div class="colorpick">
+              <p>Selected Color</p>
+              <div id="colorDiv"></div>
+            </div>
+            <div id="modalCanvas"></div>
+            <div id="palette"></div>
+          </div>
+          <div class="modalFooter">
+            <button id="modalCancel" class="modalBtn">Cancel</button>
+            <button id="modalClear" class="modalBtn">Clear</button>
+            <button id="modalSubmit" class="modalBtn">Submit</button>
           </div>
         </div>
-        <div class="modalMain">
-          <div class="colorpick">
-            <p>Selected Color</p>
-            <div id="colorDiv"></div>
-          </div>
-          <div id="modalCanvas"></div>
-          <div id="palette"></div>
-        </div>
-        <div class="modalFooter">
-          <button id="modalCancel" class="modalBtn">Cancel</button>
-          <button id="modalSubmit" class="modalBtn">Submit</button>
+        <div class="user-canvas-info">
+          <h1>{{currentUser.name}}</h1>
+          <h2>{{currentUser.pixel_count}} pixels</h2>
         </div>
       </div>
     </main>
-    <h1>{{currentUser.name}}</h1>
-    <h2>{{currentUser.pixel_count}} pixels</h2>
+
     <a href="/questions">questions</a>
     <footer>
       <a href="/logout"><button class="logout">Logout</button></a>
