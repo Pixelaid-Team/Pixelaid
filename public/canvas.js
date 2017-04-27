@@ -222,9 +222,9 @@ function getId(pos){
   if(stringA === "0"){
     return +stringB +1
   } else if(stringA === "1"){
-    return +stringB + 4
+    return +stringB + 5
   } else if(stringA === "2"){
-    return +stringB + 7
+    return +stringB + 11
   }
 }
 
