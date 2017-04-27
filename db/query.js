@@ -88,6 +88,13 @@ function endorse(obj){
 }
 
 
+function getKudos(id){
+  return pg('kudo')
+  .fullOuterJoin('kudo', 'kudo.from_user_id', 'answer.question_id')
+  .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id)
+}
+
+
 
 // function getKudos(id){
 //   return pg('kudo')
