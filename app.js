@@ -172,7 +172,7 @@ app.get("/answer/:id", (req, res)=>{
   .then(data =>{
     // console.log(data)
     console.log("hello world");
-    console.log(data.answer_username);
+    console.log(data);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
 })
 })
