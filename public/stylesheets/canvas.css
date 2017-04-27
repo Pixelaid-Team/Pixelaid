@@ -81,8 +81,8 @@ header {
   border:1px solid black;
   display:flex;
   flex-wrap:wrap;
-  min-width: 384px;
-  max-width: 384px;
+  min-width: 640px;
+  max-width: 640px;
   min-height: 384px;
   max-height: 384px;
   box-sizing: content-box;
@@ -102,10 +102,10 @@ header {
   display:none;
   position:fixed;
   z-index: 1;
-  width:450px;
-  height:450px;
   padding: 17px;
   margin-top: -27px;
+  width:500px;
+  height:500px;
   /*opacity: .5;*/
   background-color: rgb(208, 227, 237);
 
@@ -153,9 +153,9 @@ header {
 }
 
 #palette {
-  /*border:1px solid black;*/
-  width:32px;
-  height:288px;
+  border:1px solid black;
+  width:64px;
+  height:256px;
   display:flex;
   flex-wrap:wrap;
 }
