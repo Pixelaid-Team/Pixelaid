@@ -22,8 +22,14 @@
         <div>
           <label for="body">Kudo Description</label>
           <input type="text" name="body" value="">
-          <label for="from_user_id">From:</label>
-          <input type="text" name="from_user_id" value="">
+          <label for="from_user_id"></label>
+          <input type="hidden" name="from_user_id" value="">
+          <span>Give Kudo To:</span><select name="cars">
+            <option value="user1">user1</option>
+            <option value="user2">user2</option>
+            <option value="user3">user3</option>
+            <option value="user4">user4</option>
+          </select>
         </div>
         <button>Give Kudo</button>
       </form>

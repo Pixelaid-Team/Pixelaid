@@ -29,46 +29,51 @@ function getCanvas(){
 function updateCanvas(obj){
   let temp = obj['json']
   let newObj = JSON.parse(temp)
-  //console.log(newObj);
-  return pg('section').where('id', newObj['id']).update({
-    'row_0': newObj[0],
-    'row_1': newObj[1],
-    'row_2': newObj[2],
-    'row_3': newObj[3],
-    'row_4': newObj[4],
-    'row_5': newObj[5],
-    'row_6': newObj[6],
-    'row_7': newObj[7],
-    'row_8': newObj[8],
-    'row_9': newObj[9],
-    'row_10': newObj[10],
-    'row_11': newObj[11],
-    'row_12': newObj[12],
-    'row_13': newObj[13],
-    'row_14': newObj[14],
-    'row_15': newObj[15]
+  //console.log(newObj.section);
+  //console.log(newObj.pixels);
+  return pg('section').where('id', newObj.section['id']).update({
+    'row_0': newObj.section[0],
+    'row_1': newObj.section[1],
+    'row_2': newObj.section[2],
+    'row_3': newObj.section[3],
+    'row_4': newObj.section[4],
+    'row_5': newObj.section[5],
+    'row_6': newObj.section[6],
+    'row_7': newObj.section[7],
+    'row_8': newObj.section[8],
+    'row_9': newObj.section[9],
+    'row_10': newObj.section[10],
+    'row_11': newObj.section[11],
+    'row_12': newObj.section[12],
+    'row_13': newObj.section[13],
+    'row_14': newObj.section[14],
+    'row_15': newObj.section[15]
   })
 }
 
 
 //subtract pixels from user total
 function subtractPixels (data, id, pixel) {
-  console.log(data["json"]);
-  console.log(pixel);
-  var count = pixel - +data["json"]
-  console.log(data);
-  console.log(pixel);
+  let temp = data['json']
+  let newObj = JSON.parse(temp)
+
+    console.log(newObj);
+  console.log(newObj.pixels);
+
+  var count = pixel - +newObj.pixels
+  //console.log(data);
+  //console.log(pixel);
   return pg('users').where('id', id).update({'pixel_count': count})
 }
 
 
 
-function addAnswer(obj, id){
+function addAnswer(obj, user){
   return pg('answer').insert({
     body: obj.body,
     question_id: obj.question_id,
     votes: obj.votes,
-    user_id: id
+    user_id: user.id
   })
 }
 
@@ -89,9 +94,17 @@ function getKudos(id){
   .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id)
 }
 
-function giveKudo(obj){
-  return pg('kudo').insert(obj)
-}
+
+
+// function getKudos(id){
+//   return pg('kudo')
+//   .fullOuterJoin('kudo', 'kudo.from_user_id', 'answer.user_id')
+//   .select('*', "answer.body as answer_body", "answer.id as answer_id").where('question.id', '=', id)
+// }
+
+// function giveKudo(obj){
+//   return pg('kudo').insert(obj)
+// }
 
 
 
@@ -105,8 +118,8 @@ module.exports={
   getCanvas,
   updateCanvas,
   endorse,
-  getKudos,
-  giveKudo,
+  // getKudos,
+  //giveKudo,
   addPixel,
   subtractPixels
 }

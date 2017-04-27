@@ -126,18 +126,22 @@ app.get('/data', (req, res)=>{
 app.post('/updateCanvas', (req, res) =>{
   query.updateCanvas(req.body)
   .then(() => {
-    res.redirect('canvas')
+    //res.redirect('canvas')
+    query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+    .then(() =>{
+      res.redirect('/canvas')
+    })
   })
 })
 
 
 //subtract from the user's pixel count
-app.post('/subtractPixels', (req, res) => {
-  query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
-  .then(() => {
-    res.redirect('canvas')
-  })
-})
+// app.post('/subtractPixels', (req, res) => {
+//   query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+//   .then(() => {
+//     res.redirect('/updateCanvas')
+//   })
+// })
 
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
@@ -162,20 +166,25 @@ app.get("/delete/:id", (req, res)=> {
   })
 })
 
+var answerUser = 'hey'
 
 app.get("/answer/:id", (req, res)=>{
+  let user = req.user
  query.getAnswer(req.params.id)
-  .then(data=>{
-    // console.log(data);
+  .then(data =>{
+    data[0].user = user.name
+    console.log(data)
     res.render("answer", {data, title: data[0].title, body: data[0].body})
-  })
+})
 })
 
 app.get('/answerpixel/:id', (req, res) => {
   let answerId = req.params.id
+  let username = req.user
+  console.log(username);
   query.addPixel(req.user)
   .then(data => {
-    res.redirect('/answer/' + answerId)
+    res.redirect('/answer/' + answerId )
   })
 })
 
@@ -183,8 +192,8 @@ app.post("/addAnswer/:id", (req, res)=>{
   req.body.question_id = req.params.id
   let answerId = req.params.id
   req.body['votes'] = 0
-  query.addAnswer(req.body, req.user.id)
-  .then(data =>{
+  query.addAnswer(req.body, req.user)
+  .then(() =>{
     res.redirect("/answerpixel/" + answerId)
   })
 })
@@ -206,13 +215,14 @@ app.post('/endorse/:id', (req, res) => {
   })
 })
 
+//renders the kudos page, with updated kudos
 
 app.get("/kudos", (req, res)=>{
- query.getKudos(req.params.id)
-  .then(data=>{
-    console.log(data);
-    res.render("kudos", {data})
-  })
+ // query.getKudos(req.params.id)
+ //  .then(data=>{
+ //    console.log(data);
+    res.render("kudos")
+  // })
 })
 
 app.post('/giveKudo', (req, res) => {
@@ -249,4 +259,4 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, console.log('listening on ' + port))
 
-module.exports = app;
+module.exports = app
