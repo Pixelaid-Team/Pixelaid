@@ -42,21 +42,21 @@
 
       {{#each data}}
         <div class="questionOuterBox">
-          <div class="col l9">
+          <div class="question-text">
             <span class="title">
               <h1>{{this.title}}</h1>
               <h4>{{this.body}}</h4>
             </span>
           </div>
-          <div class="col l3">
-            <a href="/delete/{{this.id}}"><button>Delete</button></a>
+          <div class="question-buttons">
             <a href="/answer/{{id}}"><button>Answers</button></a>
+            <a href="/delete/{{this.id}}"><button>Delete</button></a>
           </div>
         </div>
       {{/each}}
 
       </div>
-      
+
       <section class="addQuestion">
         <h3>ADD NEW QUESTION</h3>
         <form action="/add-questions" method="post">
