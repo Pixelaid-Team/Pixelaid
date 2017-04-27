@@ -14,9 +14,10 @@
           <a href="/"><img src="../media/pixelaid-logo.svg" alt=""></a>
         </div>
         <div class="nav-buttons">
+          <a href="/canvas"><button type="button">CANVAS</button></a>
           <a href="/questions"><button type="button">QUESTIONS</button></a>
           <a href="/kudos"><button type="button">KUDOS</button></a>
-          <a href="#"><button type="button">LOGOUT?</button></a>
+          <a href="/logout"><button type="button">LOGOUT</button></a>
         </div>
       </header>
 
@@ -25,7 +26,7 @@
         <div id="myModal" class="modal">
           <div class="modalHeader">
             <h2 id="modalPos">0,0</h2>
-            <h2>User: {{currentUser.name}}</h2>
+            <h2>{{currentUser.name}}</h2>
             <div>
               <h2>Pixels: <span id="userPixels">{{currentUser.pixel_count}}</span></h2>
               <h2>Pixels: <span id="spendPixels"></span></h2>
@@ -51,11 +52,6 @@
         </div>
       </div>
     </main>
-
-    <a href="/questions">questions</a>
-    <footer>
-      <a href="/logout"><button class="logout">Logout</button></a>
-    </footer>
     <script src="canvas.js"></script>
   </body>
 </html>

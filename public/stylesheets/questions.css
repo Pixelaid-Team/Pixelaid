@@ -1,61 +1,103 @@
-html{
+body {
   font-family: "Nova Square", Helvetica, arial, freesans, clean, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.question-container {
+  width: 61%;
+  display: flex;
+  flex-direction: column;
+}
+
+.questionOuterBox {
+  border: 5px solid black;
+  /*background-color: rgba(241, 27, 27, 0.5);*/
+  width: 100%;
+  margin: 11px 0;
+  padding: 11px 2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.question-text {
+  width: 75%;
 
 }
-nav{
-  background-color: #CEE3F8;
+
+.question-buttons button {
+  border: none;
+  background-color: red;
+  color: white;
+  font-family: 'VT323', sans-serif;
+  font-size: 1.5em;
+  padding: 3px 7px;
+  cursor: pointer;
 }
-.navLogo{
-  width: 15%;
+
+.addQuestion {
+  width: 31%;
+  /*height: 21em;*/
+  padding: 11px 3px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(9, 9, 9, 0.9);
+  color: white;
 }
-.brand-logo{
-  padding-right: 20%
+
+.addQuestion form {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  /*flex-wrap: nowrap;*/
+  justify-content: space-around;
+  align-items: center;
+
 }
-.button{
+
+.addQuestion input, .addQuestion textarea {
+  width: 87%;
+  font-size: 1.5em;
+  font-family: 'Nova Square', sans-serif;
+  margin: 11px 0;
+}
+
+.addQuestion button {
+  border: none;
+  background-color: red;
+  color: white;
+  font-family: 'VT323', sans-serif;
+  font-size: 1.5em;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.button {
   background-color: white;
-    border: 0px;
+  border: 0px;
 }
-.row{
-  border: .5px solid black;
 
+.row {
+  border: .5px solid black;
 }
-.votes{
+
+.votes {
   padding-left: 1vw;
 }
 
 @media(min-width: 800) {
-  .parallax {
 
-  }
 }
 
 @media (min-width: 1000px) {
-  .parallax {
 
-  }
 
-  .logo-container img {
-    width: 50%;
-  }
-
-  .sign-in form {
-    width: 30%;
-    height: 100%;
-  }
-
-  .sign-in-form input {
-    width: 70%;
-    font-size: 1.5em;
-    font-family: 'Nova Square', sans-serif;
-    margin: 11px 0;
-  }
-
-  .questions-header {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-
-  img {
-    width: 20vw
-  }
 }

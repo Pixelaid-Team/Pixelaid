@@ -5,49 +5,52 @@
     <title>Questions</title>
     <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
     <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/canvas.css">
     <link rel="stylesheet" href="./stylesheets/questions.css">
   </head>
-  
+
   <body class="container">
-    <header class="questions-header">
-      <nav class="nav">
-        <a href="/questions">Questions</a>         <a href="/canvas">PixelBoard</a>
-        <a href="/kudos">Kudos</a>
-      </nav>
+    <header>
       <div class="header-logo">
-        <img src="./media/pixelaid-logo.svg" alt="">
+        <a href="/"><img src="../media/pixelaid-logo.svg" alt=""></a>
       </div>
-      <div class="header-nav-buttons">
-      <h1>Ask for help!</h1>
+      <div class="nav-buttons">
+        <a href="/canvas"><button type="button">CANVAS</button></a>
+        <a href="/questions"><button type="button">QUESTIONS</button></a>
+        <a href="/kudos"><button type="button">KUDOS</button></a>
+        <a href="/logout"><button type="button">LOGOUT</button></a>
+      </div>
     </header>
-    <section class="addQuestion">
-      <form action="/add-questions" method="post">
-        <div>
-          <label for="title">Title</label>
-          <input type="text" name="title" value="">
-        </div>
-        <div>
-          <label for="body">Details</label>
-          <input type="text" name="body" value="">
-        </div>
-        <button>Add Question</button>
-      </form>
-    </section>
+
     <main>
+      <div class="question-container">
+
       {{#each data}}
         <div class="questionOuterBox">
-          <div class="col l9">
+          <div class="question-text">
             <span class="title">
               <h1>{{this.title}}</h1>
               <h4>{{this.body}}</h4>
             </span>
           </div>
-          <div class="col l3">
-            <a href="/delete/{{this.id}}"><button>Delete</button></a>
+          <div class="question-buttons">
             <a href="/answer/{{id}}"><button>Answers</button></a>
+            <a href="/delete/{{this.id}}"><button>Delete</button></a>
           </div>
         </div>
       {{/each}}
+
+      </div>
+
+      <section class="addQuestion">
+        <h2>ADD NEW QUESTION</h2>
+        <form action="/add-questions" method="post">
+          <input type="text" name="title" placeholder="TITLE">
+          <textarea name="body" rows="7" cols="51" placeholder="TELL ME MORE..."></textarea>
+          <!-- <input type="text" name="body" placeholder="DETAILS"> -->
+          <button>Add Question</button>
+        </form>
+      </section>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
