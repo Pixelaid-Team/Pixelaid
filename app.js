@@ -187,6 +187,7 @@ app.get('/answerpixel/:id', (req, res) => {
 })
 
 app.post("/addAnswer/:id", (req, res)=>{
+  
   req.body.question_id = req.params.id
   let answerId = req.params.id
   req.body['votes'] = 0
