@@ -251,6 +251,7 @@ function PostObjectToUrl(url, obj){
       input = document.createElement("input");
       input.setAttribute("name", "json");
       input.setAttribute("value", json);
+      input.setAttribute("type", "hidden");
       form.appendChild(input);
       document.body.appendChild(form);
       form.submit();
@@ -267,6 +268,7 @@ function subtractPixels(url, val){
         input = document.createElement("input");
         input.setAttribute("name", "json");
         input.setAttribute("value", val);
+        input.setAttribute("type", "hidden");
         form.appendChild(input);
         document.body.appendChild(form);
         form.submit();
@@ -306,7 +308,7 @@ function getColor(char){
       return "rgb(145, 20, 84)"
       break;
     case "O":
-      return "rgb(242, 146, 33)"
+      return "rgb(249, 158, 51)"
       break;
     case "S":
       return "rgb(33, 242, 205)"
@@ -318,7 +320,7 @@ function getColor(char){
       return "rgb(196, 196, 196)"
       break;
     case "H":
-      return "rgb(48, 48, 48)"
+      return "rgb(133, 86, 64)"
       break;
     case "L":
       return "rgb(0, 0, 0)"
@@ -358,7 +360,7 @@ function getChar(color){
     case "rgb(145, 20, 84)":
       return "M"
       break;
-    case "rgb(242, 146, 33)":
+    case "rgb(249, 158, 51)":
       return "O"
       break;
     case "rgb(33, 242, 205)":
@@ -370,7 +372,7 @@ function getChar(color){
     case "rgb(196, 196, 196)":
       return "E"
       break;
-    case "rgb(48, 48, 48)":
+    case "rgb(133, 86, 64)":
       return "H"
       break;
     case "rgb(0, 0, 0)":

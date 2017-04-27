@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.integer('user_id').references('id').inTable('users')
     table.integer('votes')
     table.timestamp('created_at').defaultTo(knex.fn.now())
+    table.string("answer_username")
   })
 };
 
