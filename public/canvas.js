@@ -31,14 +31,11 @@ $(document).ready(function(){
         modalUp = true
         sectionPos = secDiv.id
         sectionId = getId(sectionPos)
-        //console.log(sectionId);
-        //console.log(modal.style.display);
+        console.log(sectionId);
         sectionArr = fullPic[secDiv.id]
-        //let temp = sectionArr.slice()
+        //sectionArr = copyArr(fullPic[secDiv.id])
         //FIX cancel and erase the sectionArr here!
-        //console.log(sectionArr);
         modal.style.display = "flex"
-        //console.log(secDiv.id);
         drawSection(fullPic, secDiv.id)
         selectColor(selectedColor)
 
@@ -139,7 +136,8 @@ function drawCanvas(arr){
 function drawSection(obj, pos){
   $('#modalPos').text(pos)
   $('#spendPixels').text(pixelsUsed)
-
+  modalCanvas.empty()
+  palette.empty()
   let tempPixel = $('#userPixels').text()
   userPixel = +tempPixel
 
@@ -222,13 +220,17 @@ function getId(pos){
   if(stringA === "0"){
     return +stringB +1
   } else if(stringA === "1"){
-    return +stringB + 5
+    return +stringB + 6
   } else if(stringA === "2"){
     return +stringB + 11
   }
 }
 
-
+//copy the array into a NEW copy
+function copyArr(arr){
+  let newArr = []
+  console.log(arr);
+}
 
 //post the current selectedArr to the database
 function PostObjectToUrl(url, obj){
