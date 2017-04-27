@@ -170,8 +170,9 @@ app.get("/delete/:id", (req, res)=> {
 app.get("/answer/:id", (req, res)=>{
  query.getAnswers(req.params.id)
   .then(data =>{
-    console.log(data)
+    // console.log(data)
     console.log("hello world");
+    console.log(data.answer_username);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
 })
 })
@@ -179,7 +180,7 @@ app.get("/answer/:id", (req, res)=>{
 app.get('/answerpixel/:id', (req, res) => {
   let answerId = req.params.id
   let username = req.user
-  console.log(username);
+  // console.log(username);
   query.addPixel(req.user)
   .then(data => {
     res.redirect('/answer/' + answerId )
@@ -187,7 +188,6 @@ app.get('/answerpixel/:id', (req, res) => {
 })
 
 app.post("/addAnswer/:id", (req, res)=>{
-  
   req.body.question_id = req.params.id
   let answerId = req.params.id
   req.body['votes'] = 0

@@ -57,16 +57,12 @@ function subtractPixels (data, id, pixel) {
   let temp = data['json']
   let newObj = JSON.parse(temp)
 
-    console.log(newObj);
-  console.log(newObj.pixels);
 
   var count = pixel - +newObj.pixels
   //console.log(data);
   //console.log(pixel);
   return pg('users').where('id', id).update({'pixel_count': count})
 }
-
-
 
 function addAnswer(obj, user){
   return pg('answer').insert({
@@ -122,5 +118,5 @@ module.exports={
   // getKudos,
   //giveKudo,
   addPixel,
-  subtractPixels
+  subtractPixels,
 }
