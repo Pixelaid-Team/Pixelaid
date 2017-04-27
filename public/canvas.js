@@ -278,7 +278,7 @@ function subtractPixels(url, val){
 function getColor(char){
   switch(char){
     case "G":
-      return "rgb(74, 214, 72)"
+      return "rgb(103, 255, 101)"
       break;
     case "A":
       return "rgb(14, 113, 51)"
@@ -305,7 +305,7 @@ function getColor(char){
       return "rgb(131, 1, 201)"
       break;
     case "M":
-      return "rgb(145, 20, 84)"
+      return "rgb(117, 13, 32)"
       break;
     case "O":
       return "rgb(249, 158, 51)"
@@ -330,7 +330,7 @@ function getColor(char){
 //return color from character
 function getChar(color){
   switch(color){
-    case "rgb(74, 214, 72)":
+    case "rgb(103, 255, 101)":
       return "G"
       break;
     case "rgb(14, 113, 51)":
@@ -357,7 +357,7 @@ function getChar(color){
     case "rgb(131, 1, 201)":
       return "V"
       break;
-    case "rgb(145, 20, 84)":
+    case "rgb(117, 13, 32)":
       return "M"
       break;
     case "rgb(249, 158, 51)":

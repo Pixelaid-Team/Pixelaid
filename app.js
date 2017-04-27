@@ -78,14 +78,11 @@ app.get('/signup', (req, res) => {
 
 const saltRounds = 10
 
-// app.get('/signuperror', (req, res) => {
-//   res.render('signup', {error: "Username already exists"})
-// })
+app.get('/signuperror', (req, res) => {
+  res.render('signup', {error: "Username already exists"})
+})
 
 app.post('/signup', (req, res) => {
-  // if (pg('users').select('username').where('username', req.body.username)) {
-  //   res.redirect('/signuperror')
-  // }
     bcrypt.genSalt(saltRounds)
     .then((salt) => {
     console.log(salt);
@@ -99,10 +96,16 @@ app.post('/signup', (req, res) => {
         pixel_count: 31
         })
       })
+      .catch(err => {
+        res.redirect('/signuperror')
+      })
+      .then(() => {
+        res.redirect('/')
+      })
     })
-  .then(() => {
-    res.redirect('/')
-  })
+  // .then(() => {
+  //   res.redirect('/')
+  // })
 })
 
 var currentUser = 'hey'
