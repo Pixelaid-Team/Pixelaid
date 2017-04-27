@@ -1,6 +1,6 @@
 var sectionSize = 128,
   sectionRows = 3,
-  sectionCols = 3,
+  sectionCols = 5,
   modalUp = false,
   userPixels = 0,
   pixelsUsed = 0,
@@ -9,7 +9,7 @@ var sectionSize = 128,
   sectionPos = "",
   selectedColor = "rgb(255, 255, 255)";
 
-var colors = ["G","Y","R","B","V","O","W","E","L"]
+var colors = ["G", "A", "Y", "R", "P", "T", "B", "D", "V", "M", "O", "S", "W", "E", "H", "L"]
 var modal = document.getElementById('myModal')
 var modalCanvas = $('#modalCanvas')
 var palette = $('#palette')
@@ -31,15 +31,12 @@ $(document).ready(function(){
         modalUp = true
         sectionPos = secDiv.id
         sectionId = getId(sectionPos)
-        //console.log(sectionId);
-        //console.log(modal.style.display);
-        sectionArr = fullPic[secDiv.id]
-        //let temp = sectionArr.slice()
+        console.log(fullPic[secDiv.id]);
+        //sectionArr = fullPic[secDiv.id]
+        sectionArr = copyArr(fullPic[secDiv.id])
         //FIX cancel and erase the sectionArr here!
-        //console.log(sectionArr);
         modal.style.display = "flex"
-        //console.log(secDiv.id);
-        drawSection(fullPic, secDiv.id)
+        drawSection(sectionArr, sectionId)
         selectColor(selectedColor)
 
       }
@@ -66,7 +63,6 @@ $(document).ready(function(){
             event.target.style.backgroundColor = selectedColor
             pixelsUsed += 1
             $('#spendPixels').text(pixelsUsed)
-            console.log(userPixel +" - "+ pixelsUsed);
           }
         } else {
           //add warning message
@@ -99,11 +95,11 @@ $(document).ready(function(){
 
     //clear the edits, array, and pixels used in the section
     $('#modalClear').click(function(){
-      console.log(sectionArr);
-      console.log(fullPic[sectionPos]);
-
+      sectionArr = copyArr(fullPic[sectionPos])
+      drawSection(sectionArr, sectionPos)
+      pixelsUsed = 0
+      $('#spendPixels').text(pixelsUsed)
     })
-
   })
 })
 
@@ -136,15 +132,16 @@ function drawCanvas(arr){
 }
 
 //create single selected section with color palette
-function drawSection(obj, pos){
+function drawSection(arr, pos){
   $('#modalPos').text(pos)
   $('#spendPixels').text(pixelsUsed)
-
+  modalCanvas.empty()
+  palette.empty()
   let tempPixel = $('#userPixels').text()
   userPixel = +tempPixel
 
 
-  let arr = obj[pos]
+  //let arr = obj[pos]
   for (let i = 2; i < arr.length; i++) {
     for (let n = 0; n < arr[i].length; n++) {
       let tempDiv = document.createElement('div')
@@ -222,13 +219,25 @@ function getId(pos){
   if(stringA === "0"){
     return +stringB +1
   } else if(stringA === "1"){
-    return +stringB + 4
+    return +stringB + 6
   } else if(stringA === "2"){
-    return +stringB + 7
+    return +stringB + 11
   }
 }
 
-
+//copy the array into a NEW copy
+function copyArr(arr){
+  let newArr = []
+  console.log(arr);
+  for (let i = 0; i < arr.length; i++) {
+    newArr[i] = []
+    for (let n = 0; n < arr[i].length; n++) {
+      newArr[i][n] = arr[i][n]
+    }
+  }
+  //console.log(newArr);
+  return newArr
+}
 
 //post the current selectedArr to the database
 function PostObjectToUrl(url, obj){
@@ -267,7 +276,10 @@ function subtractPixels(url, val){
 function getColor(char){
   switch(char){
     case "G":
-      return "rgb(37, 156, 35)"
+      return "rgb(74, 214, 72)"
+      break;
+    case "A":
+      return "rgb(14, 113, 51)"
       break;
     case "Y":
       return "rgb(240, 238, 77)"
@@ -275,31 +287,52 @@ function getColor(char){
     case "R":
       return "rgb(244, 38, 24)"
       break;
+    case "P":
+      return "rgb(245, 105, 172)"
+      break;
+    case "T":
+      return "rgb(255, 224, 189)"
+      break;
     case "B":
       return "rgb(55, 171, 228)"
+      break;
+    case "D":
+      return "rgb(20, 39, 204)"
       break;
     case "V":
       return "rgb(131, 1, 201)"
       break;
+    case "M":
+      return "rgb(145, 20, 84)"
+      break;
     case "O":
       return "rgb(242, 146, 33)"
+      break;
+    case "S":
+      return "rgb(33, 242, 205)"
       break;
     case "W":
       return "rgb(255, 255, 255)"
       break;
     case "E":
-      return "rgb(152, 152, 152)"
+      return "rgb(196, 196, 196)"
+      break;
+    case "H":
+      return "rgb(48, 48, 48)"
       break;
     case "L":
       return "rgb(0, 0, 0)"
       break;
   }
 }
-//get character from color
+//return color from character
 function getChar(color){
   switch(color){
-    case "rgb(37, 156, 35)":
+    case "rgb(74, 214, 72)":
       return "G"
+      break;
+    case "rgb(14, 113, 51)":
+      return "A"
       break;
     case "rgb(240, 238, 77)":
       return "Y"
@@ -307,20 +340,38 @@ function getChar(color){
     case "rgb(244, 38, 24)":
       return "R"
       break;
+    case "rgb(245, 105, 172)":
+      return "P"
+      break;
+    case "rgb(255, 224, 189)":
+      return "T"
+      break;
     case "rgb(55, 171, 228)":
       return "B"
+      break;
+    case "rgb(20, 39, 204)":
+      return "D"
       break;
     case "rgb(131, 1, 201)":
       return "V"
       break;
+    case "rgb(145, 20, 84)":
+      return "M"
+      break;
     case "rgb(242, 146, 33)":
       return "O"
+      break;
+    case "rgb(33, 242, 205)":
+      return "S"
       break;
     case "rgb(255, 255, 255)":
       return "W"
       break;
-    case "rgb(152, 152, 152)":
+    case "rgb(196, 196, 196)":
       return "E"
+      break;
+    case "rgb(48, 48, 48)":
+      return "H"
       break;
     case "rgb(0, 0, 0)":
       return "L"
