@@ -90,8 +90,10 @@ $(document).ready(function(){
     $("#modalSubmit").click(function(){
       let newData = pack(sectionArr, sectionId)
       console.log(newData);
-      PostObjectToUrl("/updateCanvas", newData)
-      subtractPixels("/subtractPixels", pixelsUsed)
+      PostObjectToUrl("/updateCanvas", {section: newData, pixels: pixelsUsed})
+      //subtractPixels("/subtractPixels", pixelsUsed)
+
+
 
     })
 

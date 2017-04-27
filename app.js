@@ -125,18 +125,22 @@ app.get('/data', (req, res)=>{
 app.post('/updateCanvas', (req, res) =>{
   query.updateCanvas(req.body)
   .then(() => {
-    res.redirect('canvas')
+    //res.redirect('canvas')
+    query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+    .then(() =>{
+      res.redirect('/canvas')
+    })
   })
 })
 
 
 //subtract from the user's pixel count
-app.post('/subtractPixels', (req, res) => {
-  query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
-  .then(() => {
-    res.redirect('canvas')
-  })
-})
+// app.post('/subtractPixels', (req, res) => {
+//   query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
+//   .then(() => {
+//     res.redirect('/updateCanvas')
+//   })
+// })
 
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
