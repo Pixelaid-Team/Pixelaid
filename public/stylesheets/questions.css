@@ -9,19 +9,25 @@ main {
 }
 
 .question-container {
-  width: 67%;
+  width: 61%;
   display: flex;
   flex-direction: column;
 }
 
 .questionOuterBox {
-  /*border: 1px solid black;*/
-  background-color: rgba(242, 217, 244, 0.5);
+  border: 5px solid black;
+  /*background-color: rgba(241, 27, 27, 0.5);*/
   width: 100%;
   margin: 11px 0;
+  padding: 11px 2px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.question-text {
+  width: 75%;
+
 }
 
 .question-buttons button {
@@ -36,25 +42,42 @@ main {
 
 .addQuestion {
   width: 31%;
+  /*height: 21em;*/
+  padding: 11px 3px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(9, 9, 9, 0.7);
+  background-color: rgba(9, 9, 9, 0.9);
   color: white;
 }
 
 .addQuestion form {
   width: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  /*align-items: center;*/
+  /*flex-wrap: nowrap;*/
+  justify-content: space-around;
+  align-items: center;
+
 }
 
-.addQuestion input, .addQuestion label {
-  width: 77%;
+.addQuestion input, .addQuestion textarea {
+  width: 87%;
+  font-size: 1.5em;
+  font-family: 'Nova Square', sans-serif;
+  margin: 11px 0;
+}
+
+.addQuestion button {
+  border: none;
+  background-color: red;
+  color: white;
+  font-family: 'VT323', sans-serif;
+  font-size: 1.5em;
+  padding: 3px 7px;
+  cursor: pointer;
 }
 
 .button {
