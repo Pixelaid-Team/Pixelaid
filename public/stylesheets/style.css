@@ -185,13 +185,13 @@ a {
   width: 37%;
 }
 
-@media(min-width: 800) {
+@media(min-width: 700px) {
   .parallax {
     background-image: url('../media/tablet-background.png');
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
   .parallax {
     background-image: url('../media/desktop-background2.png');
     background-position: bottom;

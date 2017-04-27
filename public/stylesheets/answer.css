@@ -2,6 +2,26 @@
   font-family: 'Nova Square', sans-serif;
 }
 
+.original-question {
+  width: 69%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(9, 9, 9, 0.9);
+  color: white;
+  margin-left: 11px;
+  padding: 7px 0;
+  font-family: 'VT323', sans-serif;
+  font-size: 1.5em;
+}
+
+.original-question > h1 {
+  margin-right: 17px;
+  font-size: 2.5em;
+  font-family: 'VT323', sans-serif;
+}
+
 main {
   display: flex;
   flex-direction: row-reverse;
