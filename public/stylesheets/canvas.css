@@ -59,8 +59,8 @@ header {
   border:1px solid black;
   display:flex;
   flex-wrap:wrap;
-  min-width: 384px;
-  max-width: 384px;
+  min-width: 640px;
+  max-width: 640px;
   min-height: 384px;
   max-height: 384px;
   box-sizing: content-box;

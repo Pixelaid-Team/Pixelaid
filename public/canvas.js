@@ -1,6 +1,6 @@
 var sectionSize = 128,
   sectionRows = 3,
-  sectionCols = 3,
+  sectionCols = 5,
   modalUp = false,
   userPixels = 0,
   pixelsUsed = 0,
