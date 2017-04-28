@@ -60,7 +60,8 @@
       <div class="link row answer-single">
         <div class="vote-stuff">
           <form method="post" href="/endorse/{{this.id}}" action="/endorse/{{this.id}}">
-            <button class="button"><img src="/media/talk.png" alt=""></button>
+            <button class="button"><i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+            </button>
             <input type="hidden" name="answer_id" value="{{this.answer_id}}">
             <input type="hidden" name="votes" value="{{this.votes}}">
           </form>
@@ -73,5 +74,7 @@
 
     </section>
     </main>
+
+    <script src="https://use.fontawesome.com/a620c1b288.js"></script>
   </body>
 </html>
