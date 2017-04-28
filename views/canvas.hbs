@@ -47,11 +47,15 @@
           </div>
         </div>
         <div class="user-canvas-info">
-          <h1>{{currentUser.name}}</h1>
-          <h2>{{currentUser.pixel_count}} pixels</h2>
+          <h1>Hi, {{currentUser.name}}</h1>
+          <h2 id="user-pixel">You have {{currentUser.pixel_count}} pixels</h2>
+          <p><i class="fa fa-arrow-left" aria-hidden="true"></i>
+            Click section on canvas to use your pixels!</p>
+          <a href="/questions">Answer some questions to earn more pixels!</a>
         </div>
       </div>
     </main>
+    <script src="https://use.fontawesome.com/a620c1b288.js"></script>
     <script src="canvas.js"></script>
   </body>
 </html>

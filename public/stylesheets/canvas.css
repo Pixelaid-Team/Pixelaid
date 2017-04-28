@@ -61,6 +61,15 @@ header {
   cursor: pointer;
 }
 
+.nav-buttons button:hover {
+  background-color: rgb(240, 187, 225);
+  color: black;
+}
+
+#user-pixel {
+  font-family: 'VT323'
+}
+
 .section {
   display:flex;
   flex-wrap:wrap;
@@ -96,6 +105,17 @@ header {
 
 .user-canvas-info {
   font-family: 'Nova Square', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 11em;
+  font-size: 1.25em;
+}
+
+.user-canvas-info a {
+  text-decoration: none;
+  color: black;
 }
 
 .modal {
@@ -104,12 +124,12 @@ header {
   background-position: center;
   z-index: 1;
   padding: 7px;
-  margin-top: -37px;
+  margin-top: -77px;
   width:500px;
   height:500px;
   /*opacity: .5;*/
   background-color: rgb(208, 227, 237);
-
+  border: 5px solid black;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
