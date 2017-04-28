@@ -2,9 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-
     <title>Answers</title>
-
     <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../stylesheets/canvas.css">
@@ -22,11 +20,18 @@
         <a href="/logout"><button type="button">LOGOUT</button></a>
       </div>
     </header>
+    <section class="original-question">
+      <!-- <a href="/questions">arrow</a> -->
+      <h1>Q:</h1>
+      <span class="title">
+        <h1>{{title}}</h1>
+        <h4>{{body}}</h4>
+      </span>
+    </section>
 
     <main>
-
-    <section>
-      <!-- <a href="/questions">arrow</a> -->
+    <!-- <section>
+      <a href="/questions">arrow</a>
       <div class="link row">
         <div class="col l3">
         </div>
@@ -37,7 +42,7 @@
           </span>
         </div>
       </div>
-    </section>
+    </section> -->
     <section class="add-answer-container">
       <h3>ADD ANSWER. GET PIXELS.</h3>
       {{#each data}}
@@ -55,7 +60,8 @@
       <div class="link row answer-single">
         <div class="vote-stuff">
           <form method="post" href="/endorse/{{this.id}}" action="/endorse/{{this.id}}">
-            <button class="button"><img src="/media/talk.png" alt=""></button>
+            <button class="button"><i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+            </button>
             <input type="hidden" name="answer_id" value="{{this.answer_id}}">
             <input type="hidden" name="votes" value="{{this.votes}}">
           </form>
@@ -68,5 +74,7 @@
 
     </section>
     </main>
+
+    <script src="https://use.fontawesome.com/a620c1b288.js"></script>
   </body>
 </html>

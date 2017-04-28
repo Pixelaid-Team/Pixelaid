@@ -1,11 +1,7 @@
 const pg = require('./knex')
 
 function getAll(){
-  return pg('question')
-}
-
-function findUserIfExists(obj) {
-  return pg('users').select()
+  return pg('question').orderBy('id', 'desc')
 }
 
 function add(obj){
@@ -118,7 +114,6 @@ function giveKudo(obj, user){
 
 module.exports={
   getAll,
-  findUserIfExists,
   add,
   deleteQuestion,
   getAnswers,
