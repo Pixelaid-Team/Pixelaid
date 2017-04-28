@@ -1,7 +1,7 @@
 const pg = require('./knex')
 
 function getAll(){
-  return pg('question')
+  return pg('question').orderBy('id', 'desc')
 }
 
 function add(obj){
