@@ -87,9 +87,6 @@ function endorse(obj){
 
 function getKudos(obj, name){
   return pg('kudo').orderBy('created_at', 'desc')
-
-  // .fullJoin('users', 'users.id','kudo.from_user_id').select("kudo.body", "kudo.from_user_id").where('kudo.from_user_id',"=", user.username)
-
 }
 
 function getUsers(obj){

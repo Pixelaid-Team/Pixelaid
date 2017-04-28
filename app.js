@@ -135,14 +135,6 @@ app.post('/updateCanvas', (req, res) =>{
 })
 
 
-//subtract from the user's pixel count
-// app.post('/subtractPixels', (req, res) => {
-//   query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
-//   .then(() => {
-//     res.redirect('/updateCanvas')
-//   })
-// })
-
 app.get('/questions', (req, res) => {
   query.getAll().then(data => {
     res.render('questions', {data})
@@ -248,15 +240,6 @@ app.post('/giveKudo', (req, res) => {
     res.redirect('/kudoPoints')
   })
 })
-//
-// app.post('/giveKudo', (req, res) => {
-//   let kudo = req.body.to
-//
-//   query.giveKudo(req.body, req.user)
-//   .then(data => {
-//     res.redirect('/kudos')
-//   })
-// })
 
 
 
