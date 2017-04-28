@@ -217,22 +217,46 @@ app.post('/endorse/:id', (req, res) => {
 //renders the kudos page, with updated kudos
 
 app.get("/kudos", (req, res)=>{
- // query.getKudos(req.params.id)
- //  .then(data=>{
- //    console.log(data);
-    res.render("kudos")
-  // })
+  console.log(req.user.name);
+ query.getKudos(req.body)
+ .then(data=>{
+   data.name = currentUser.name;
+  //  console.log(data);
+  query.getUsers(req.body)
+  .then(user=>{
+    console.log(user);
+    res.render("kudos", {user, data})
+  })
+  })
+})
+
+var kudo = "name"
+
+app.get('/kudoPoints', (req, res) => {
+  console.log(kudo)
+  query.kudoPoints(kudo)
+  .then(data => {
+    res.redirect('/kudos' )
+  })
 })
 
 app.post('/giveKudo', (req, res) => {
-  console.log(req.body);
-  query.giveKudo(req.body)
+  kudo = req.body.to
+  console.log(kudo);
+  query.giveKudo(req.body, req.user)
   .then(data => {
-    res.redirect('/kudos', {data})
-  }).catch(function(error){
-    console.log('this is error:', error);
+    res.redirect('/kudoPoints')
   })
 })
+//
+// app.post('/giveKudo', (req, res) => {
+//   let kudo = req.body.to
+//
+//   query.giveKudo(req.body, req.user)
+//   .then(data => {
+//     res.redirect('/kudos')
+//   })
+// })
 
 
 

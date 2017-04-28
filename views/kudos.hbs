@@ -3,50 +3,66 @@
   <head>
     <meta charset="utf-8">
     <title>Questions</title>
-    <link rel="stylesheet" href="/questions.css">
-    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Nova+Square|VT323" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/canvas.css">
+    <link rel="stylesheet" href="./stylesheets/questions.css">
   </head>
-  <nav class="nav">
-    <a href="/questions">Questions</a>         <a href="/canvas">PixelBoard</a>
-    <a href="/kudos">Kudos</a>
 
-  </nav>
   <body class="container">
-    <h1></h1>
-    <section class="giveKudo">
-      <form action="/giveKudo" method="post">
-        <div>
-          <label for="to_user_id">Give Kudos To:</label>
-          <input type="text" name="to_user_id" value="">
-        </div>
-        <div>
-          <label for="body">Kudo Description</label>
-          <input type="text" name="body" value="">
-          <label for="from_user_id"></label>
-          <input type="hidden" name="from_user_id" value="">
-          <span>Give Kudo To:</span><select name="cars">
-            <option value="user1">user1</option>
-            <option value="user2">user2</option>
-            <option value="user3">user3</option>
-            <option value="user4">user4</option>
-          </select>
-        </div>
-        <button>Give Kudo</button>
-      </form>
-    </section>
-    <main>
-      {{#each data}}
-        <div class="questionOuterBox">
-          <div class="col l9">
-            <span class="title">
-              <h2>{{this.body}}</h2>
-              <h6>{{this.to_user_id}}</h6>
-              <h6>{{this.from_user_id}}</h6>
+    <header>
+      <div class="header-logo">
+        <a href="/"><img src="../media/pixelaid-logo.svg" alt=""></a>
+      </div>
+      <div class="nav-buttons">
+        <a href="/canvas"><button type="button">CANVAS</button></a>
+        <a href="/questions"><button type="button">QUESTIONS</button></a>
+        <a href="/kudos"><button type="button">KUDOS</button></a>
+        <a href="/logout"><button type="button">LOGOUT</button></a>
+      </div>
+    </header>
 
-            </span>
+    <main>
+      <div class="question-container">
+
+        {{#each data}}
+          <div class="questionOuterBox">
+            <div class="col l9">
+              <span class="title">
+                <h2>{{this.body}}</h2>
+                <h3>for:{{this.to}}</h3>
+                <h5>from:{{this.from}}</h5>
+
+              </span>
+            </div>
           </div>
-        </div>
-      {{/each}}
+        {{/each}}
+
+      </div>
+
+      <section class="addQuestion">
+        <h2>GIVE A KUDO</h2>
+        <form action="/giveKudo" method="post">
+          <div>
+            <label for="from"></label>
+            <input type="hidden" name="from" value="{{data.name}}">
+          </div>
+          <div>
+            <label for="body">Kudo Description</label>
+            <input type="text" name="body" value="">
+
+              <label for="to">Give Kudo To:</label>
+              <select name="to">
+                {{#each user}}
+
+                <option value="{{this.name}}">{{this.name}}</option>
+                {{/each}}
+              </select>
+
+          </div>
+          <button>Give Kudo</button>
+        </form>
+      </section>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
