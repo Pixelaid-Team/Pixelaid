@@ -4,11 +4,11 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('body')
     table.integer('to_user_id').references('id').inTable('users')
-    table.integer('from_user_id').references('id').inTable('users')
+    table.integer('from_user_id').references('id').inTable('groups')
     table.integer('votes')
-    table.timestamp('created_at').defaultTo(knex.fn.now())
-    // table.string("from")
-    // table.string("to")
+    table.timestamp('created_at')
+    table.string("from")
+    table.string("to")
   })
 };
 

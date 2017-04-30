@@ -3,16 +3,16 @@ exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('kudo').del()
     .then(function () {
-      Inserts seed entries
+      // Inserts seed entries
       return knex('kudo').insert([
         {
         body: "Hey thanks for help on the ERD's",
-        to_user_id: 1,
+        to_user_id: 2,
         from_user_id: 1,
         votes: 5,
         created_at: "Today",
-        from: "nick",
-        to: "derek"
+        from: "admin",
+        to: "devin-h"
         },
         {
         body: "Hey thanks for help on the ERD's",
@@ -20,8 +20,8 @@ exports.seed = function(knex, Promise) {
         from_user_id: 3,
         votes: 5,
         created_at: "Today",
-        from: "Lee",
-        to: "Molly"
+        from: "jodan-f",
+        to: "devin-h"
         },
         {
         body: "Hey thanks for help on the ERD'sn",
@@ -29,8 +29,8 @@ exports.seed = function(knex, Promise) {
         from_user_id: 2,
         votes: 5,
         created_at: "Today",
-        from: "devin",
-        to: "Taylor"
+        from: "devin-h",
+        to: "jordan-f"
         }
       ]);
     });

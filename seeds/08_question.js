@@ -3,7 +3,7 @@ exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
   return knex('question').del()
     .then(function () {
-      Inserts seed entries
+      // Inserts seed entries
       return knex('question').insert([
         {
         title: "Hey thanks for help on the ERD's",

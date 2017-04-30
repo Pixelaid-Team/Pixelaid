@@ -22,7 +22,7 @@ var auth = require('./routes/auth')
 const signup = require('./routes/signup')
 
 var app = express();
-const port = process.env.PORT || 5001
+const port = process.env.PORT || 5003
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
