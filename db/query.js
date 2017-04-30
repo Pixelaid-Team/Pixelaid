@@ -76,8 +76,32 @@ function addPixel(obj) {
   return pg('users').where('id', obj['id']).update({'pixel_count': currentPixels})
 }
 
+function joinEndorse(answerId){
+  console.log(answerId);
+  console.log("lkdwsdkljlkjdlkjed");
+  return pg('users')
+  .fullOuterJoin('answer', 'answer.user_id', 'users.id')
+  .select('*', "users.username as endorse_name", "users.id as endorse_id").where('answer.id', '=', answerId.answer_id)
+}
+
+function endorsePixel(obj, user, body) {
+  console.log(obj);
+  console.log(obj[0].user_id);
+  console.log(user.id);
+  console.log(body);
+  console.log("checking");
+    if (obj[0].user_id !== user.id) {
+        return pg('users').where('users.id',"=", obj[0].user_id).increment('pixel_count', 30)
+    }
+      else{
+        console.log("error");
+      }
+}
+
+
 function endorse(obj){
-  return pg('answer').where('id', obj['answer_id']).update('votes', +obj['votes'] + 1)
+  console.log("endorse check");
+  return pg('answer').where('id', obj['answer_id']).increment('votes', 1)
 }
 
 
@@ -93,10 +117,7 @@ function kudoPoints(obj){
   console.log(obj);
   return pg('users').where('name', obj).increment('pixel_count', 20)
  }
-
-
-
-
+//
 function giveKudo(obj, user){
   // console.log(obj);
   // console.log(user.name);
@@ -121,6 +142,8 @@ module.exports={
   getCanvas,
   updateCanvas,
   endorse,
+  joinEndorse,
+  endorsePixel,
   getKudos,
   giveKudo,
   addPixel,

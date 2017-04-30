@@ -22,7 +22,7 @@ var auth = require('./routes/auth')
 const signup = require('./routes/signup')
 
 var app = express();
-const port = process.env.PORT || 5003
+const port = process.env.PORT || 5001
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -103,9 +103,6 @@ app.post('/signup', (req, res) => {
         res.redirect('/')
       })
     })
-  // .then(() => {
-  //   res.redirect('/')
-  // })
 })
 
 var currentUser = 'hey'
@@ -192,22 +189,61 @@ app.post("/addAnswer/:id", (req, res)=>{
   })
 })
 
-app.get('/endorsePixel/:id', (req, res) => {
-  let answerId = req.params.id
-  query.addPixel(req.user)
-  .then(data => {
-    res.redirect('/answer/' + answerId)
-  })
+app.get('/answererror', (req, res) => {
+  res.render('answer', {error: "You can't endorse your own answer"})
 })
 
+// app.get('/endorsePixel/:id', (req, res) => {
+//   let answerId = req.params.id
+//   let user = req.user
+//   console.log("this is endorsed");
+//   console.log(answerId);
+//   query.joinEndorse(answerId)
+//   .then(join=>{
+//     console.log(join);
+//     query.endorsePixel(join, user)
+//     .catch(() => {
+//       res.redirect('/answererror')
+//     })
+//     .then(data => {
+//       res.redirect('/answer/' + answerId)
+//     })
+//   })
+// })
+
+// app.post('/endorse/:id', (req, res) => {
+//   // console.log("this is endorsed");
+//   let answerId = req.params.id
+//   console.log(req.body);
+//   query.endorse(req.body)
+//   .then(()=>{
+//     res.redirect('/endorsePixel/' + answerId)
+//   })
+// })
+
 app.post('/endorse/:id', (req, res) => {
-  console.log("this is endorsed");
   let answerId = req.params.id
+  let user = req.user
+  let body = req.body
+  console.log("this is endorsed");
+  console.log(answerId);
   query.endorse(req.body)
-  .then(()=>{
-    res.redirect('/endorsePixel/' + answerId)
-  })
+    .then(obj=>{
+      query.joinEndorse(body)
+      .then(join=>{
+        console.log(join);
+        query.endorsePixel(join, user, body)
+        // .catch(err => {
+        //   res.redirect('/answererror')
+        // })
+          .then(data => {
+            res.redirect('/answer/' + answerId)
+          })
+      })
+    })
 })
+
+
 
 //renders the kudos page, with updated kudos
 
