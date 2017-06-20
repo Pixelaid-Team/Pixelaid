@@ -17,7 +17,7 @@ var colorDiv = $('#colorDiv')
 
 //on document ready
 $(document).ready(function(){
-  console.log("js connected");
+
   $.get('/data').then(function(data){
 
     var fullPic = unpack(data)
@@ -31,7 +31,7 @@ $(document).ready(function(){
         modalUp = true
         sectionPos = secDiv.id
         sectionId = getId(sectionPos)
-        console.log(fullPic[secDiv.id]);
+
         //sectionArr = fullPic[secDiv.id]
         sectionArr = copyArr(fullPic[secDiv.id])
         //FIX cancel and erase the sectionArr here!
@@ -85,7 +85,7 @@ $(document).ready(function(){
     //submit edited section to the DB canvas
     $("#modalSubmit").click(function(){
       let newData = pack(sectionArr, sectionId)
-      console.log(newData);
+
       PostObjectToUrl("/updateCanvas", {section: newData, pixels: pixelsUsed})
       //subtractPixels("/subtractPixels", pixelsUsed)
 
@@ -228,7 +228,7 @@ function getId(pos){
 //copy the array into a NEW copy
 function copyArr(arr){
   let newArr = []
-  console.log(arr);
+  
   for (let i = 0; i < arr.length; i++) {
     newArr[i] = []
     for (let n = 0; n < arr[i].length; n++) {
