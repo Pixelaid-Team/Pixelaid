@@ -1,35 +1,31 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var query = require('./db/query')
-var session = require('express-session');
-var passport = require("passport");
-var flash = require('connect-flash')
-var bcrypt = require('bcrypt')
-const pg = require('./db/knex')
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const query = require('./db/query')
+const session = require('express-session');
+const passport = require("passport");
+const flash = require('connect-flash');
+const bcrypt = require('bcrypt');
+const pg = require('./db/knex');
 
+require('dotenv').config();
+require('./helpers/passport');
 
-require('dotenv').config()
+const index = require('./routes/index');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
+const signup = require('./routes/signup');
 
-require('./helpers/passport')
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var auth = require('./routes/auth')
-const signup = require('./routes/signup')
-
-var app = express();
-const port = process.env.PORT || 5001
+const app = express();
+const port = process.env.PORT || 5001;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,11 +44,6 @@ app.use(flash())
 
 app.get('/', (req, res) => {
   res.render('index')
-  // res.send({
-  //   session: req.session,
-  //   user: req.user,
-  //   authenticated: req.isAuthenticated()
-  // })
 })
 
 app.get('/login', (req, res) => {
@@ -83,38 +74,37 @@ app.get('/signuperror', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-    bcrypt.genSalt(saltRounds)
-    .then((salt) => {
-    console.log(salt);
-    bcrypt.hash(req.body.password, salt)
-    .then((hash) => {
-        return pg('users').insert({
-        username: req.body.username,
-        password: hash,
-        email: req.body.email,
-        name: req.body.name,
-        pixel_count: 31
-        })
-      })
-      .catch(err => {
-        res.redirect('/signuperror')
-      })
-      .then(() => {
-        res.redirect('/')
+  bcrypt.genSalt(saltRounds)
+  .then((salt) => {
+  bcrypt.hash(req.body.password, salt)
+  .then((hash) => {
+      return pg('users').insert({
+      username: req.body.username,
+      password: hash,
+      email: req.body.email,
+      name: req.body.name,
+      pixel_count: 31
       })
     })
+    .catch(err => {
+      res.redirect('/signuperror')
+    })
+    .then(() => {
+      res.redirect('/')
+    })
+  })
 })
 
-var currentUser = 'hey'
+var currentUser = 'Guest'
 
 app.get('/canvas', (req, res) => {
-  //console.log(req.user);
   currentUser = req.user
   query.getCanvas()
   .then(data => {
     res.render('canvas', {data, currentUser})
   })
 })
+
 //this is to pass the canvas db to canvas.js
 app.get('/data', (req, res)=>{
   query.getCanvas()
@@ -122,11 +112,11 @@ app.get('/data', (req, res)=>{
     res.json(data)
   })
 })
+
 //update the canvas DB
 app.post('/updateCanvas', (req, res) =>{
   query.updateCanvas(req.body)
   .then(() => {
-    //res.redirect('canvas')
     query.subtractPixels(req.body, req.user.id, req.user.pixel_count)
     .then(() =>{
       res.redirect('/canvas')
@@ -153,7 +143,7 @@ app.post('/add-questions', (req, res) => {
 app.get("/delete/:id", (req, res)=> {
   console.log("deleted post");
   query.deleteQuestion(req.params.id)
-  .then(()=>{
+  .then(() => {
     res.redirect('/questions')
   })
 })
@@ -161,12 +151,12 @@ app.get("/delete/:id", (req, res)=> {
 
 app.get("/answer/:id", (req, res)=>{
  query.getAnswers(req.params.id)
-  .then(data =>{
+  .then(data => {
     // console.log(data)
     console.log("hello world");
     console.log(data);
     res.render("answer", {data, title: data[0].title, body: data[0].body})
-})
+  })
 })
 
 app.get('/answerpixel/:id', (req, res) => {

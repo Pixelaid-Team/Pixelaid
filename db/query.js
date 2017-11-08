@@ -1,32 +1,35 @@
 const pg = require('./knex')
 
-function getAll(){
+function getAll() {
   return pg('question').orderBy('id', 'desc')
 }
 
-function add(obj){
+function add(obj) {
   return pg('question').insert(obj)
 }
 
-function deleteQuestion(id){
-  return pg('question').where('id', id).del()}
+function deleteQuestion(id) {
+  return pg('answer').where('question_id', id).del()
+  .then(data => {
+    return pg('question').where('id', id).del()
+  })
+}
 
-function getAnswers(id){
+function getAnswers(id) {
   return pg('answer')
   .fullOuterJoin('question', 'question.id', 'answer.question_id')
   .select('*', "answer.body as answer_body", "answer.id as answer_id", "answer.answer_username as answer_username").where('question.id', '=', id).orderBy('votes', 'desc')
 }
 
 //get the canvas and tables.
-function getCanvas(){
+function getCanvas() {
   return pg('section').orderBy('id', 'asc')
 }
-//update teh canvas
-function updateCanvas(obj){
+
+//update the canvas
+function updateCanvas(obj) {
   let temp = obj['json']
   let newObj = JSON.parse(temp)
-  //console.log(newObj.section);
-  //console.log(newObj.pixels);
   return pg('section').where('id', newObj.section['id']).update({
     'row_0': newObj.section[0],
     'row_1': newObj.section[1],
@@ -49,18 +52,15 @@ function updateCanvas(obj){
 
 
 //subtract pixels from user total
-function subtractPixels (data, id, pixel) {
-  let temp = data['json']
-  let newObj = JSON.parse(temp)
+function subtractPixels(data, id, pixel) {
+  let temp = data['json'];
+  let newObj = JSON.parse(temp);
+  let count = pixel - +newObj.pixels;
 
-
-  var count = pixel - +newObj.pixels
-  //console.log(data);
-  //console.log(pixel);
   return pg('users').where('id', id).update({'pixel_count': count})
 }
 
-function addAnswer(obj, user){
+function addAnswer(obj, user) {
   return pg('answer').insert({
     body: obj.body,
     question_id: obj.question_id,
@@ -71,56 +71,43 @@ function addAnswer(obj, user){
 }
 
 function addPixel(obj) {
-  var currentPixels = +obj['pixel_count'] + 11
-  console.log(currentPixels);
+  let currentPixels = +obj['pixel_count'] + 11
   return pg('users').where('id', obj['id']).update({'pixel_count': currentPixels})
 }
 
-function joinEndorse(answerId){
-  console.log(answerId);
-  console.log("lkdwsdkljlkjdlkjed");
+function joinEndorse(answerId) {
   return pg('users')
   .fullOuterJoin('answer', 'answer.user_id', 'users.id')
   .select('*', "users.username as endorse_name", "users.id as endorse_id").where('answer.id', '=', answerId.answer_id)
 }
 
 function endorsePixel(obj, user, body) {
-  console.log(obj);
-  console.log(obj[0].user_id);
-  console.log(user.id);
-  console.log(body);
-  console.log("checking");
-    if (obj[0].user_id !== user.id) {
-        return pg('users').where('users.id',"=", obj[0].user_id).increment('pixel_count', 30)
-    }
-      else{
-        console.log("error");
-      }
+  if (obj[0].user_id !== user.id) {
+    return pg('users').where('users.id',"=", obj[0].user_id).increment('pixel_count', 30)
+  } else {
+    console.log("Endorse Pixel Error")
+  }
 }
 
 
-function endorse(obj){
-  console.log("endorse check");
+function endorse(obj) {
   return pg('answer').where('id', obj['answer_id']).increment('votes', 1)
 }
 
 
-function getKudos(obj, name){
+function getKudos(obj, name) {
   return pg('kudo').orderBy('created_at', 'desc')
 }
 
-function getUsers(obj){
+function getUsers(obj) {
   return pg("users").select("name","id");
 }
 
-function kudoPoints(obj){
-  console.log(obj);
+function kudoPoints(obj) {
   return pg('users').where('name', obj).increment('pixel_count', 20)
- }
-//
-function giveKudo(obj, user){
-  // console.log(obj);
-  // console.log(user.name);
+}
+
+function giveKudo(obj, user) {
   return pg("kudo").insert({
     to: obj.to,
     body: obj.body,
@@ -130,10 +117,7 @@ function giveKudo(obj, user){
   })
 }
 
-
-
-
-module.exports={
+module.exports = {
   getAll,
   add,
   deleteQuestion,
