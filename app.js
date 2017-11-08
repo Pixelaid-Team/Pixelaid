@@ -74,6 +74,7 @@ app.get('/signuperror', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
+<<<<<<< HEAD
   bcrypt.genSalt(saltRounds)
   .then((salt) => {
   bcrypt.hash(req.body.password, salt)
@@ -84,6 +85,26 @@ app.post('/signup', (req, res) => {
       email: req.body.email,
       name: req.body.name,
       pixel_count: 31
+=======
+    bcrypt.genSalt(saltRounds)
+    .then((salt) => {
+
+    bcrypt.hash(req.body.password, salt)
+    .then((hash) => {
+        return pg('users').insert({
+        username: req.body.username,
+        password: hash,
+        email: req.body.email,
+        name: req.body.name,
+        pixel_count: 31
+        })
+      })
+      .catch(err => {
+        res.redirect('/signuperror')
+      })
+      .then(() => {
+        res.redirect('/')
+>>>>>>> 7f308de8723a46c996bad8479daad4e2febdad50
       })
     })
     .catch(err => {
@@ -132,7 +153,7 @@ app.get('/questions', (req, res) => {
 })
 
 app.post('/add-questions', (req, res) => {
-  console.log(req.body);
+
   query.add(req.body).then(() =>{
     res.redirect('/questions')
   }).catch(function(error){
@@ -141,7 +162,7 @@ app.post('/add-questions', (req, res) => {
 })
 
 app.get("/delete/:id", (req, res)=> {
-  console.log("deleted post");
+
   query.deleteQuestion(req.params.id)
   .then(() => {
     res.redirect('/questions')
@@ -153,8 +174,8 @@ app.get("/answer/:id", (req, res)=>{
  query.getAnswers(req.params.id)
   .then(data => {
     // console.log(data)
-    console.log("hello world");
-    console.log(data);
+
+
     res.render("answer", {data, title: data[0].title, body: data[0].body})
   })
 })
@@ -215,13 +236,13 @@ app.post('/endorse/:id', (req, res) => {
   let answerId = req.params.id
   let user = req.user
   let body = req.body
-  console.log("this is endorsed");
-  console.log(answerId);
+
+
   query.endorse(req.body)
     .then(obj=>{
       query.joinEndorse(body)
       .then(join=>{
-        console.log(join);
+
         query.endorsePixel(join, user, body)
         // .catch(err => {
         //   res.redirect('/answererror')
@@ -238,14 +259,14 @@ app.post('/endorse/:id', (req, res) => {
 //renders the kudos page, with updated kudos
 
 app.get("/kudos", (req, res)=>{
-  console.log(req.user.name);
+
  query.getKudos(req.body)
  .then(data=>{
    data.name = currentUser.name;
   //  console.log(data);
   query.getUsers(req.body)
   .then(user=>{
-    console.log(user);
+
     res.render("kudos", {user, data})
   })
   })
@@ -254,7 +275,7 @@ app.get("/kudos", (req, res)=>{
 var kudo = "name"
 
 app.get('/kudoPoints', (req, res) => {
-  console.log(kudo)
+
   query.kudoPoints(kudo)
   .then(data => {
     res.redirect('/kudos' )
@@ -263,7 +284,7 @@ app.get('/kudoPoints', (req, res) => {
 
 app.post('/giveKudo', (req, res) => {
   kudo = req.body.to
-  console.log(kudo);
+  
   query.giveKudo(req.body, req.user)
   .then(data => {
     res.redirect('/kudoPoints')
