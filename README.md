@@ -6,4 +6,4 @@ Pixelaid is a gamified collaboration tool for teams. Members can post questions 
 
 ![Pixelaid Pixel Canvas](https://github.com/Pixelaid-Team/Pixelaid/blob/master/public/media/pixel-canvas-thumbnail.png)
 
-Checkout Pixelaid [here](http://www.pixelaidapp.com/)
+Checkout Pixelaid [here](https://pixelaidapp.herokuapp.com)
