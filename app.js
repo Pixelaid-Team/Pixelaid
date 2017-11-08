@@ -21,6 +21,7 @@ const signup = require('./routes/signup');
 
 const app = express();
 const port = process.env.PORT || 5001;
+const saltRounds = 10
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -67,44 +68,21 @@ app.get('/signup', (req, res) => {
   res.render('signup')
 })
 
-const saltRounds = 10
-
 app.get('/signuperror', (req, res) => {
   res.render('signup', {error: "USERNAME/EMAIL ALREADY EXISTS"})
 })
 
 app.post('/signup', (req, res) => {
-<<<<<<< HEAD
   bcrypt.genSalt(saltRounds)
   .then((salt) => {
-  bcrypt.hash(req.body.password, salt)
-  .then((hash) => {
-      return pg('users').insert({
-      username: req.body.username,
-      password: hash,
-      email: req.body.email,
-      name: req.body.name,
-      pixel_count: 31
-=======
-    bcrypt.genSalt(saltRounds)
-    .then((salt) => {
-
     bcrypt.hash(req.body.password, salt)
     .then((hash) => {
-        return pg('users').insert({
+      return pg('users').insert({
         username: req.body.username,
         password: hash,
         email: req.body.email,
         name: req.body.name,
         pixel_count: 31
-        })
-      })
-      .catch(err => {
-        res.redirect('/signuperror')
-      })
-      .then(() => {
-        res.redirect('/')
->>>>>>> 7f308de8723a46c996bad8479daad4e2febdad50
       })
     })
     .catch(err => {
@@ -156,13 +134,12 @@ app.post('/add-questions', (req, res) => {
 
   query.add(req.body).then(() =>{
     res.redirect('/questions')
-  }).catch(function(error){
-    console.log('this is error:', error);
+  }).catch((error) => {
+    res.send(error)
   })
 })
 
 app.get("/delete/:id", (req, res)=> {
-
   query.deleteQuestion(req.params.id)
   .then(() => {
     res.redirect('/questions')
@@ -173,9 +150,6 @@ app.get("/delete/:id", (req, res)=> {
 app.get("/answer/:id", (req, res)=>{
  query.getAnswers(req.params.id)
   .then(data => {
-    // console.log(data)
-
-
     res.render("answer", {data, title: data[0].title, body: data[0].body})
   })
 })
@@ -183,7 +157,6 @@ app.get("/answer/:id", (req, res)=>{
 app.get('/answerpixel/:id', (req, res) => {
   let answerId = req.params.id
   let username = req.user
-  // console.log(username);
   query.addPixel(req.user)
   .then(data => {
     res.redirect('/answer/' + answerId )
@@ -204,78 +177,38 @@ app.get('/answererror', (req, res) => {
   res.render('answer', {error: "You can't endorse your own answer"})
 })
 
-// app.get('/endorsePixel/:id', (req, res) => {
-//   let answerId = req.params.id
-//   let user = req.user
-//   console.log("this is endorsed");
-//   console.log(answerId);
-//   query.joinEndorse(answerId)
-//   .then(join=>{
-//     console.log(join);
-//     query.endorsePixel(join, user)
-//     .catch(() => {
-//       res.redirect('/answererror')
-//     })
-//     .then(data => {
-//       res.redirect('/answer/' + answerId)
-//     })
-//   })
-// })
-
-// app.post('/endorse/:id', (req, res) => {
-//   // console.log("this is endorsed");
-//   let answerId = req.params.id
-//   console.log(req.body);
-//   query.endorse(req.body)
-//   .then(()=>{
-//     res.redirect('/endorsePixel/' + answerId)
-//   })
-// })
-
 app.post('/endorse/:id', (req, res) => {
   let answerId = req.params.id
   let user = req.user
   let body = req.body
 
-
   query.endorse(req.body)
-    .then(obj=>{
-      query.joinEndorse(body)
-      .then(join=>{
-
-        query.endorsePixel(join, user, body)
-        // .catch(err => {
-        //   res.redirect('/answererror')
-        // })
-          .then(data => {
-            res.redirect('/answer/' + answerId)
-          })
+  .then(obj => {
+    query.joinEndorse(body)
+    .then(join => {
+      query.endorsePixel(join, user, body)
+      .then(data => {
+        res.redirect('/answer/' + answerId)
       })
     })
+  })
 })
 
-
-
 //renders the kudos page, with updated kudos
-
 app.get("/kudos", (req, res)=>{
-
  query.getKudos(req.body)
  .then(data=>{
-   data.name = currentUser.name;
-  //  console.log(data);
-  query.getUsers(req.body)
-  .then(user=>{
+    data.name = currentUser.name;
+    query.getUsers(req.body)
+    .then(user=>{
 
-    res.render("kudos", {user, data})
-  })
+      res.render("kudos", {user, data})
+    })
   })
 })
 
 var kudo = "name"
-
 app.get('/kudoPoints', (req, res) => {
-
   query.kudoPoints(kudo)
   .then(data => {
     res.redirect('/kudos' )
@@ -284,15 +217,11 @@ app.get('/kudoPoints', (req, res) => {
 
 app.post('/giveKudo', (req, res) => {
   kudo = req.body.to
-  
   query.giveKudo(req.body, req.user)
   .then(data => {
     res.redirect('/kudoPoints')
   })
 })
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -303,7 +232,6 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
