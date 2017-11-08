@@ -21,28 +21,34 @@ const handleErrors = (req) => {
   })
 }
 
-exports.createUser =(req)=> {
-    return handleErrors(req).then(() => {
-      const salt = bcrypt.genSaltSync()
-      const hash = bcrypt.hashSync(req.body.user.password, salt);
-      return knex('users').insert({
-        username: req.body.user.username,
-        password:hash,
-      }, "*")
-    })
+const createUser = (req) => {
+  return handleErrors(req).then(() => {
+    const salt = bcrypt.genSaltSync()
+    const hash = bcrypt.hashSync(req.body.user.password, salt);
+    return knex('users').insert({
+      username: req.body.user.username,
+      password:hash,
+    }, "*")
+  })
 },
 
-exports.editUser =(req)=> {
-    return handleErrors(req).then(() => {
-      const salt = bcrypt.genSaltSync()
-      const hash = bcrypt.hashSync(req.body.user.password, salt);
-      return knex('users')
-      .where({id: req.params.id})
-      .update({
-        username: req.body.user.username,
-        password:hash,
-      }, "*")
-    })
+const editUser = (req) => {
+  return handleErrors(req).then(() => {
+    const salt = bcrypt.genSaltSync()
+    const hash = bcrypt.hashSync(req.body.user.password, salt);
+    return knex('users')
+    .where({id: req.params.id})
+    .update({
+      username: req.body.user.username,
+      password:hash,
+    }, "*")
+  })
 },
 
-exports.comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);
+const comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);
+
+module.exports = {
+  createUser,
+  editUser,
+  comparePass
+}

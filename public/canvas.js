@@ -18,10 +18,8 @@ var colorDiv = $('#colorDiv')
 //on document ready
 $(document).ready(function(){
 
-  $.get('/data').then(function(data){
-
+  $.get('/data').then(function(data) {
     var fullPic = unpack(data)
-    //console.log(data);
     drawCanvas(fullPic)
 
     //click on section to open modal edit window
@@ -31,18 +29,12 @@ $(document).ready(function(){
         modalUp = true
         sectionPos = secDiv.id
         sectionId = getId(sectionPos)
-
-        //sectionArr = fullPic[secDiv.id]
         sectionArr = copyArr(fullPic[secDiv.id])
-        //FIX cancel and erase the sectionArr here!
         modal.style.display = "flex"
         drawSection(sectionArr, sectionId)
         selectColor(selectedColor)
-
       }
     })
-
-
 
     //change selected color
     $('#palette').click(function(event){
@@ -53,11 +45,9 @@ $(document).ready(function(){
     //change color of section pixels and update the selected Array
     $('#modalCanvas').click(function(event){
       if(event.target.classList.contains('editPixel')){
-        //make sure user has enough pixels
         if(userPixel > 0 && pixelsUsed < userPixel){
           let yy = event.target.getAttribute('y')
           let xx = event.target.getAttribute('x')
-          //forgive a misclick of same color
           if(event.target.style.backgroundColor != selectedColor){
             sectionArr[yy][xx] = getChar(selectedColor)
             event.target.style.backgroundColor = selectedColor
@@ -65,7 +55,7 @@ $(document).ready(function(){
             $('#spendPixels').text(pixelsUsed)
           }
         } else {
-          //add warning message
+          console.log('Modal Error')
         }
       }
     })
@@ -77,20 +67,12 @@ $(document).ready(function(){
       modalCanvas.empty()
       palette.empty()
       selectedColor = "rgb(255, 255, 255)"
-      //FIX cancel and erase the sectionArr here!
-      //sectionArr = []
-      //sectionId = ""
     })
 
     //submit edited section to the DB canvas
     $("#modalSubmit").click(function(){
       let newData = pack(sectionArr, sectionId)
-
       PostObjectToUrl("/updateCanvas", {section: newData, pixels: pixelsUsed})
-      //subtractPixels("/subtractPixels", pixelsUsed)
-
-
-
     })
 
     //clear the edits, array, and pixels used in the section
@@ -140,8 +122,6 @@ function drawSection(arr, pos){
   let tempPixel = $('#userPixels').text()
   userPixel = +tempPixel
 
-
-  //let arr = obj[pos]
   for (let i = 2; i < arr.length; i++) {
     for (let n = 0; n < arr[i].length; n++) {
       let tempDiv = document.createElement('div')
@@ -195,7 +175,6 @@ function unpack(arr){
 //repackage the sectiona array into an object to be sent to database
 function pack(arr, pos){
   let newObj = {}
-  //newArr[0] = getId(pos)
   newObj["id"] = pos
   newObj["canvas_id"] = 1
   for (var i = 0; i < arr.length -2; i++) {
@@ -207,7 +186,7 @@ function pack(arr, pos){
 }
 
 //get the obj id from the div coords
-function getId(pos){
+function getId(pos) {
   let stringA = ""
   let stringB = ""
   for (var i = 0; i < pos.length; i++) {
@@ -216,7 +195,7 @@ function getId(pos){
       stringB = pos.substring(i+1,pos.length)
     }
   }
-  if(stringA === "0"){
+  if(stringA === "0") {
     return +stringB +1
   } else if(stringA === "1"){
     return +stringB + 6
@@ -226,52 +205,47 @@ function getId(pos){
 }
 
 //copy the array into a NEW copy
-function copyArr(arr){
+function copyArr(arr) {
   let newArr = []
-  
+
   for (let i = 0; i < arr.length; i++) {
     newArr[i] = []
     for (let n = 0; n < arr[i].length; n++) {
       newArr[i][n] = arr[i][n]
     }
   }
-  //console.log(newArr);
   return newArr
 }
 
 //post the current selectedArr to the database
 function PostObjectToUrl(url, obj){
+  var json, form, input;
+  json = JSON.stringify(obj);
 
-      var json, form, input;
-      json = JSON.stringify(obj);
-
-      form = document.createElement("form");
-      form.method = "post";
-      form.action = url;
-      input = document.createElement("input");
-      input.setAttribute("name", "json");
-      input.setAttribute("value", json);
-      input.setAttribute("type", "hidden");
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
+  form = document.createElement("form");
+  form.method = "post";
+  form.action = url;
+  input = document.createElement("input");
+  input.setAttribute("name", "json");
+  input.setAttribute("value", json);
+  input.setAttribute("type", "hidden");
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
 }
 
 function subtractPixels(url, val){
-
-        var form, input;
-        //json = JSON.stringify(obj);
-
-        form = document.createElement("form");
-        form.method = "post";
-        form.action = url;
-        input = document.createElement("input");
-        input.setAttribute("name", "json");
-        input.setAttribute("value", val);
-        input.setAttribute("type", "hidden");
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
+  var form, input;
+  form = document.createElement("form");
+  form.method = "post";
+  form.action = url;
+  input = document.createElement("input");
+  input.setAttribute("name", "json");
+  input.setAttribute("value", val);
+  input.setAttribute("type", "hidden");
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
 }
 
 //return color from character
